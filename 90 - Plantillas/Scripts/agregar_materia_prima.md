@@ -33,15 +33,19 @@ const getFrontmatter = async (file) => {
 };
 
 const fmStock = await getFrontmatter(stockFile);
+const materias = fmStock.materias_primas || {};
 
-const conocidas = Object.keys(fmStock.materias_primas || {});
-const opciones = ["✨ Registrar NUEVA Materia Prima", ...conocidas.map(c => `🌿 Añadir Stock: ${c}`)];
+const conocidas = Object.keys(materias);
+const opciones = [
+  "✨ Registrar NUEVA Materia Prima en Catálogo",
+  ...conocidas.map(c => `🌿 ${c} (Stock actual: ${materias[c] || 0})`)
+];
 
 const seleccion = await tp.system.suggester(
   opciones,
   ["NUEVA", ...conocidas],
   false,
-  "Selecciona la materia prima recolectada:"
+  "🌿 Selecciona la Materia Prima a gestionar:"
 );
 
 if (!seleccion) return;
@@ -84,17 +88,52 @@ if (seleccion === "NUEVA") {
     fm.materias_primas[nombreLimpio] = (fm.materias_primas[nombreLimpio] || 0) + cant;
   });
 
-  new Notice(`🌿 Nueva materia prima registrada en catálogo: "${nombreLimpio}" (+${cant} en stock)`, 6000);
+  new Notice(`🌿 Nueva materia prima registrada: "${nombreLimpio}" (+${cant} en stock)`, 6000);
 } else {
-  const cantStr = await tp.system.prompt(`¿Cuántas unidades de "${seleccion}" deseas añadir?`, "1");
+  const stockActual = Number(materias[seleccion]) || 0;
+  const accion = await tp.system.suggester(
+    [
+      `➕ Añadir stock a "${seleccion}" (Recolección / Botín / Compra)`,
+      `➖ Gastar / Descartar stock de "${seleccion}"`,
+      `✏️ Establecer cantidad fija exacta (Saldo actual: ${stockActual})`
+    ],
+    ["sumar", "restar", "fijo"],
+    false,
+    `¿Qué deseas hacer con "${seleccion}"?`
+  );
+
+  if (!accion) return;
+
+  let promptTexto = "";
+  if (accion === "sumar") promptTexto = `¿Cuántas unidades de "${seleccion}" deseas AÑADIR?`;
+  if (accion === "restar") promptTexto = `¿Cuántas unidades de "${seleccion}" deseas RESTAR?`;
+  if (accion === "fijo") promptTexto = `Nuevo saldo total de "${seleccion}":`;
+
+  const cantStr = await tp.system.prompt(promptTexto, accion === "fijo" ? String(stockActual) : "1");
   if (!cantStr) return;
-  const cant = Math.max(1, parseInt(cantStr, 10) || 1);
+
+  const cantNum = parseInt(cantStr, 10);
+  if (isNaN(cantNum) || cantNum < 0) {
+    new Notice("⚠️ Cantidad no válida.");
+    return;
+  }
+
+  let nuevoSaldo = stockActual;
+  if (accion === "sumar") nuevoSaldo = stockActual + cantNum;
+  if (accion === "restar") {
+    if (cantNum > stockActual) {
+      new Notice(`⚠️ No puedes restar ${cantNum} porque solo tienes ${stockActual}. Saldo fijado en 0.`);
+      nuevoSaldo = 0;
+    } else {
+      nuevoSaldo = stockActual - cantNum;
+    }
+  }
+  if (accion === "fijo") nuevoSaldo = cantNum;
 
   await app.fileManager.processFrontMatter(stockFile, (fm) => {
     if (!fm.materias_primas) fm.materias_primas = {};
-    fm.materias_primas[seleccion] = (fm.materias_primas[seleccion] || 0) + cant;
+    fm.materias_primas[seleccion] = nuevoSaldo;
+    new Notice(`🌿 Stock actualizado:\n"${seleccion}": ${stockActual} ➔ ${nuevoSaldo}`, 5000);
   });
-
-  new Notice(`🌿 Stock actualizado: +${cant}x "${seleccion}"`, 5000);
 }
 _%>

@@ -159,6 +159,14 @@ actions:
     templateFile: 90 - Plantillas/Scripts/agregar_materia_prima.md
 ```
 ```meta-bind-button
+label: 🧪 Ajustar / Añadir Esencias
+icon: flask-round
+style: default
+actions:
+  - type: runTemplaterFile
+    templateFile: 90 - Plantillas/Scripts/ajustar_esencias.md
+```
+```meta-bind-button
 label: 📦 Añadir Consumible / Poción
 icon: package-plus
 style: default
@@ -425,14 +433,37 @@ const divBases = grid.createEl("div");
 divBases.createEl("h4", { text: "💧 Bases Líquidas (Vasija Alquímica)" });
 const tBases = divBases.createEl("table", { cls: "dataview table-view-table" });
 const thB = tBases.createEl("thead").createEl("tr");
-["Base Líquida", "Stock"].forEach(text => thB.createEl("th", { text }));
+["Base Líquida", "Stock", "Ajustar"].forEach(text => thB.createEl("th", { text, cls: "text-left" }));
 const tbB = tBases.createEl("tbody");
 for (const [b, cant] of Object.entries(bases)) {
   const r = tbB.createEl("tr");
   r.createEl("td").createEl("strong", { text: b });
-  const tdS = r.createEl("td", { cls: "text-center" });
-  tdS.createEl("span", { text: String(cant) });
-  tdS.style.fontWeight = "bold";
+  const tdS = r.createEl("td", { cls: "text-center whitespace-nowrap" });
+  const sp = tdS.createEl("span", { text: String(cant) });
+  sp.style.fontWeight = "bold";
+  sp.style.color = Number(cant) > 0 ? "var(--text-accent, #38bdf8)" : "var(--text-muted, #94a3b8)";
+
+  const tdAdj = r.createEl("td", { cls: "text-center whitespace-nowrap" });
+  const btnMinus = tdAdj.createEl("button", { text: "➖", cls: "btn-sm" });
+  btnMinus.style.marginRight = "4px";
+  btnMinus.style.cursor = "pointer";
+  btnMinus.onclick = async () => {
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.bases_liquidas) fm.bases_liquidas = {};
+      fm.bases_liquidas[b] = Math.max(0, (fm.bases_liquidas[b] || 0) - 1);
+    });
+  };
+
+  const btnPlus = tdAdj.createEl("button", { text: "➕", cls: "btn-sm" });
+  btnPlus.style.cursor = "pointer";
+  btnPlus.onclick = async () => {
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.bases_liquidas) fm.bases_liquidas = {};
+      fm.bases_liquidas[b] = (fm.bases_liquidas[b] || 0) + 1;
+    });
+  };
 }
 
 // Tabla 2: Esencias Purificadas
@@ -440,14 +471,37 @@ const divEsencias = grid.createEl("div");
 divEsencias.createEl("h4", { text: "🧪 Esencias y Polvos Purificados" });
 const tEsencias = divEsencias.createEl("table", { cls: "dataview table-view-table" });
 const thE = tEsencias.createEl("thead").createEl("tr");
-["Esencia / Reactivo", "Stock"].forEach(text => thE.createEl("th", { text }));
+["Esencia / Reactivo", "Stock", "Ajustar"].forEach(text => thE.createEl("th", { text, cls: "text-left" }));
 const tbE = tEsencias.createEl("tbody");
 for (const [e, cant] of Object.entries(esencias)) {
   const r = tbE.createEl("tr");
   r.createEl("td").createEl("strong", { text: e });
-  const tdS = r.createEl("td", { cls: "text-center" });
-  tdS.createEl("span", { text: String(cant) });
-  tdS.style.fontWeight = "bold";
+  const tdS = r.createEl("td", { cls: "text-center whitespace-nowrap" });
+  const sp = tdS.createEl("span", { text: String(cant) });
+  sp.style.fontWeight = "bold";
+  sp.style.color = Number(cant) > 0 ? "var(--text-accent, #38bdf8)" : "var(--text-muted, #94a3b8)";
+
+  const tdAdj = r.createEl("td", { cls: "text-center whitespace-nowrap" });
+  const btnMinus = tdAdj.createEl("button", { text: "➖", cls: "btn-sm" });
+  btnMinus.style.marginRight = "4px";
+  btnMinus.style.cursor = "pointer";
+  btnMinus.onclick = async () => {
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.esencias) fm.esencias = {};
+      fm.esencias[e] = Math.max(0, (fm.esencias[e] || 0) - 1);
+    });
+  };
+
+  const btnPlus = tdAdj.createEl("button", { text: "➕", cls: "btn-sm" });
+  btnPlus.style.cursor = "pointer";
+  btnPlus.onclick = async () => {
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.esencias) fm.esencias = {};
+      fm.esencias[e] = (fm.esencias[e] || 0) + 1;
+    });
+  };
 }
 ```
 
@@ -480,7 +534,7 @@ container.addEventListener("dblclick", (e) => e.stopPropagation());
 const table = container.createEl("table", { cls: "dataview table-view-table" });
 const thead = table.createEl("thead");
 const hRow = thead.createEl("tr");
-["Materia Prima", "Stock en Bruto", "Esencia Producida", "Resultado Tirada (Uds Obtenidas)", "Acción"].forEach(text => {
+["Materia Prima", "Stock en Bruto", "Añadir / Quitar", "Esencia Producida", "Resultado Tirada (Uds)", "Extracción"].forEach(text => {
   hRow.createEl("th", { text, cls: "text-left" });
 });
 
@@ -488,8 +542,15 @@ const tbody = table.createEl("tbody");
 
 for (const [mat, cant] of Object.entries(materias)) {
   const stockVal = Number(cant) || 0;
-  const formula = formulas[mat] || {};
-  const primaryEssence = Object.keys(formula)[0] || "Esencia Alquímica";
+  const formulaData = formulas[mat] || {};
+  const formulaDelta = formulaData.delta || formulaData;
+  let primaryEssence = "Esencia Alquímica";
+  for (const [k, v] of Object.entries(formulaDelta)) {
+    if (Number(v) > 0) {
+      primaryEssence = k;
+      break;
+    }
+  }
 
   const row = tbody.createEl("tr");
 
@@ -503,11 +564,34 @@ for (const [mat, cant] of Object.entries(materias)) {
   spStock.style.fontWeight = "bold";
   spStock.style.color = stockVal > 0 ? "var(--text-accent, #38bdf8)" : "var(--text-muted, #94a3b8)";
 
-  // Col 3: Esencia
+  // Col 3: Ajuste Rápido (+ / -)
+  const tdAdj = row.createEl("td", { cls: "text-center whitespace-nowrap" });
+  const btnMinus = tdAdj.createEl("button", { text: "➖", cls: "btn-sm" });
+  btnMinus.style.marginRight = "4px";
+  btnMinus.style.cursor = "pointer";
+  btnMinus.onclick = async () => {
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.materias_primas) fm.materias_primas = {};
+      fm.materias_primas[mat] = Math.max(0, (fm.materias_primas[mat] || 0) - 1);
+    });
+  };
+
+  const btnPlus = tdAdj.createEl("button", { text: "➕", cls: "btn-sm" });
+  btnPlus.style.cursor = "pointer";
+  btnPlus.onclick = async () => {
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.materias_primas) fm.materias_primas = {};
+      fm.materias_primas[mat] = (fm.materias_primas[mat] || 0) + 1;
+    });
+  };
+
+  // Col 4: Esencia
   const tdEssence = row.createEl("td");
   tdEssence.createEl("span", { text: "🧪 " + primaryEssence });
 
-  // Col 4: Campo de llenado para resultado de dados
+  // Col 5: Campo de llenado para resultado de dados
   const tdInput = row.createEl("td", { cls: "text-center whitespace-nowrap" });
   const inputQty = tdInput.createEl("input", {
     type: "number",
@@ -521,7 +605,7 @@ for (const [mat, cant] of Object.entries(materias)) {
   inputQty.style.border = "1px solid var(--background-modifier-border, #475569)";
   inputQty.min = "1";
 
-  // Col 5: Botón Extraer 1x
+  // Col 6: Botón Extraer 1x
   const tdAction = row.createEl("td", { cls: "text-center" });
   const btnExtract = tdAction.createEl("button", { text: "🔬 Extraer 1x", cls: "mod-cta btn-sm" });
   btnExtract.style.cursor = stockVal > 0 ? "pointer" : "not-allowed";

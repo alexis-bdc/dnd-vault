@@ -3,14 +3,14 @@ tipo: bbdd_inventario
 campaña: Comunidad del Alba
 nombre: Base de Datos de Inventario y Stock Alquímico
 consumibles:
-  Poción de Curación (2d4+2): 3
+  Poción de Curación (2d4+2): 2
   Poción de Curación Mayor (4d4+4): 0
   Antitoxina: 1
   Vial de Ácido (2d6): 2
   Fuego de Alquimista (1d4/t): 0
   Veneno Básico (1d4): 2
-  Incienso Místico (1d4 Nv 1): 0
-  Bomba de Humo (Ceguera): 1
+  Incienso Místico (1d4 Nv 1): 2
+  Bomba de Humo (Ceguera): 0
   Bomba de Hedor (Fétida): 0
   Bomba Psicoledia: 2
   Bomba Venenosa (1d4/t): 0
@@ -19,11 +19,11 @@ consumibles:
   Poción de Trepar: 0
   Poción de Respirar Agua: 0
   Poción de Forma Gaseosa: 0
-  cabezal de fuerza: 1
+  cabezal de fuerza: 3
   cabezal de ácido: 1
   cabezal de fuego: 1
 bases_liquidas:
-  Agua Fresca: 20
+  Agua Fresca: 6
   Agua Salada: 5
   Miel: 2
   Vino: 4
@@ -37,13 +37,13 @@ esencias:
   Extracto Vital: 8
   Extracto Mutagénico: 2
   Esencia Adaptativa: 4
-  Esencia Psicoactiva: 16
+  Esencia Psicoactiva: 2
   Toxina Concentrada: 6
   Polvo Acre: 16
   Polvo Inerte: 27
-  Polvo Ígneo: 19
-  Cristal Cinético: 4
-  Sales de Choque: 20
+  Polvo Ígneo: 4
+  Cristal Cinético: 2
+  Sales de Choque: 6
   Vitriolo Corrosivo: 4
 materias_primas:
   Hongos Feéricos de Zadash: 4
@@ -59,7 +59,7 @@ materias_primas:
   Cenizas y Turba Humosa: 0
 bandolera:
   ranura_1: Poción de Curación (2d4+2)
-  ranura_2: Bomba de Humo (Ceguera)
+  ranura_2: cabezal de ácido
   ranura_3: Bomba Psicoledia
   ranura_4: cabezal de fuerza
 tags:

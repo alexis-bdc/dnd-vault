@@ -50,9 +50,9 @@ habilidades:
   Trato con Animales: 0
 monedas:
   pc: 0
-  pp: 0
+  pp: 2
   pe: 0
-  po: 600
+  po: 3833
   ppt: 0
 espacios_conjuro:
   nv1_max: 4

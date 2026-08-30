@@ -96,6 +96,14 @@ actions:
   - type: runTemplaterFile
     templateFile: 90 - Plantillas/Scripts/agregar_materia_prima.md
 ```
+```meta-bind-button
+label: 🧪 Modificar Esencias y Polvos
+icon: flask-round
+style: default
+actions:
+  - type: runTemplaterFile
+    templateFile: 90 - Plantillas/Scripts/ajustar_esencias.md
+```
 
 ### 🎽 Bandolera Táctica de Frater Ren (4 Ranuras — Acción Adicional)
 
