@@ -59,8 +59,8 @@ materias_primas:
   Cenizas y Turba Humosa: 0
 bandolera:
   ranura_1: Poción de Curación (2d4+2)
-  ranura_2: Vacío
-  ranura_3: Vacío
+  ranura_2: Vial de Ácido (2d6)
+  ranura_3: cabezal de fuego
   ranura_4: cabezal de fuerza
 bandolera_pila:
   ranura_1: Poción de Curación (2d4+2)

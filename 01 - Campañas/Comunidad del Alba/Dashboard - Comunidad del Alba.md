@@ -22,10 +22,181 @@ tags:
 
 ### 🔮 Espacios de Conjuro Diarios
 
-| Nivel de Espacio | Máximo | Usados | Restantes |
-| :---: | :---: | :---: | :---: |
-| **Nivel 1** | `VIEW[{01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv1_max}][text]` | `INPUT[number:01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv1_usados]` | **`VIEW[{01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv1_max} - {01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv1_usados}][math]`** |
-| **Nivel 2** | `VIEW[{01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv2_max}][text]` | `INPUT[number:01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv2_usados]` | **`VIEW[{01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv2_max} - {01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv2_usados}][math]`** |
+```dataviewjs
+const renPath = "01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md";
+const renFile = app.vault.getAbstractFileByPath(renPath);
+const pRen = dv.page(renPath);
+const fmRen = (renFile ? app.metadataCache.getFileCache(renFile)?.frontmatter : null) || pRen?.file?.frontmatter || pRen || {};
+
+const ec = fmRen.espacios_conjuro || {};
+const slots = [
+  { nivel: 1, label: "Nivel 1", maxKey: "nv1_max", usedKey: "nv1_usados", defaultMax: 4 },
+  { nivel: 2, label: "Nivel 2", maxKey: "nv2_max", usedKey: "nv2_usados", defaultMax: 2 }
+];
+
+const container = dv.el("div", "");
+container.setAttribute("contenteditable", "false");
+container.addEventListener("click", (e) => e.stopPropagation());
+container.addEventListener("mousedown", (e) => e.stopPropagation());
+container.addEventListener("dblclick", (e) => e.stopPropagation());
+
+const table = container.createEl("table", { cls: "dataview table-view-table" });
+table.style.width = "100%";
+
+const thead = table.createEl("thead");
+const hRow = thead.createEl("tr");
+["Nivel", "Ranuras (Clic para marcar / desmarcar)", "Disponibles", "Acción Rápida"].forEach(text => {
+  hRow.createEl("th", { text, cls: "text-center" });
+});
+
+const tbody = table.createEl("tbody");
+
+for (const s of slots) {
+  const max = Number(ec[s.maxKey]) || s.defaultMax;
+  let currentUsed = Number(ec[s.usedKey]) || 0;
+  if (currentUsed < 0) currentUsed = 0;
+  if (currentUsed > max) currentUsed = max;
+
+  const row = tbody.createEl("tr");
+
+  // Col 1: Nivel
+  const tdNivel = row.createEl("td", { cls: "text-center" });
+  tdNivel.createEl("strong", { text: `🔮 ${s.label}` });
+
+  // Col 2: Ranuras interactivas
+  const tdSlots = row.createEl("td", { cls: "text-center" });
+  tdSlots.style.display = "flex";
+  tdSlots.style.justifyContent = "center";
+  tdSlots.style.alignItems = "center";
+  tdSlots.style.gap = "6px";
+  tdSlots.style.flexWrap = "wrap";
+
+  // Col 3: Contador
+  const tdDisp = row.createEl("td", { cls: "text-center" });
+  const badge = tdDisp.createEl("span");
+  badge.style.fontWeight = "bold";
+  badge.style.padding = "3px 10px";
+  badge.style.borderRadius = "6px";
+
+  // Col 4: Botones
+  const tdActions = row.createEl("td", { cls: "text-center whitespace-nowrap" });
+  const btnCast = tdActions.createEl("button", {
+    text: "⚡ Gastar",
+    cls: "mod-warning btn-sm"
+  });
+  btnCast.style.marginRight = "6px";
+
+  const btnRecover = tdActions.createEl("button", {
+    text: "↩️ Recuperar",
+    cls: "btn-sm"
+  });
+
+  const slotButtons = [];
+
+  const updateUI = (used) => {
+    currentUsed = used;
+    const disp = max - currentUsed;
+
+    for (let i = 1; i <= max; i++) {
+      const isUsed = i <= currentUsed;
+      const b = slotButtons[i - 1];
+      if (b) {
+        b.setText(isUsed ? "⚪" : "🟣");
+        b.title = isUsed 
+          ? `Ranura ${i}: Gastada (Clic para recuperar)` 
+          : `Ranura ${i}: Disponible (Clic para marcar como gastada)`;
+        if (isUsed) {
+          b.removeClass("mod-cta");
+          b.style.opacity = "0.45";
+        } else {
+          b.addClass("mod-cta");
+          b.style.opacity = "1";
+        }
+      }
+    }
+
+    badge.setText(` ${disp} / ${max} `);
+    if (disp === 0) {
+      badge.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
+      badge.style.color = "#ef4444";
+    } else if (disp <= Math.ceil(max / 2)) {
+      badge.style.backgroundColor = "rgba(245, 158, 11, 0.2)";
+      badge.style.color = "#f59e0b";
+    } else {
+      badge.style.backgroundColor = "rgba(34, 197, 94, 0.2)";
+      badge.style.color = "#22c55e";
+    }
+
+    btnCast.disabled = disp <= 0;
+    btnCast.style.cursor = disp > 0 ? "pointer" : "not-allowed";
+    btnRecover.disabled = currentUsed <= 0;
+    btnRecover.style.cursor = currentUsed > 0 ? "pointer" : "not-allowed";
+  };
+
+  const persistUsed = async (newUsed, message) => {
+    updateUI(newUsed);
+    if (!renFile) return;
+    await app.fileManager.processFrontMatter(renFile, (fm) => {
+      if (!fm.espacios_conjuro) fm.espacios_conjuro = {};
+      fm.espacios_conjuro[s.usedKey] = newUsed;
+    });
+    if (message) new Notice(message, 3000);
+  };
+
+  for (let i = 1; i <= max; i++) {
+    const btnSlot = tdSlots.createEl("button", { cls: "btn-sm" });
+    btnSlot.style.cursor = "pointer";
+    btnSlot.style.padding = "3px 8px";
+    btnSlot.style.borderRadius = "14px";
+    btnSlot.style.fontSize = "1.15em";
+    btnSlot.style.lineHeight = "1";
+    btnSlot.onclick = async () => {
+      const isUsed = i <= currentUsed;
+      const targetUsed = isUsed ? (i - 1) : i;
+      const msg = isUsed 
+        ? `↩️ Ranura ${i} recuperada en ${s.label} (${max - targetUsed}/${max} disponibles)`
+        : `⚡ Ranura ${i} gastada en ${s.label} (${max - targetUsed}/${max} disponibles)`;
+      await persistUsed(targetUsed, msg);
+    };
+    slotButtons.push(btnSlot);
+  }
+
+  btnCast.onclick = async () => {
+    if (currentUsed >= max) return;
+    const targetUsed = currentUsed + 1;
+    await persistUsed(targetUsed, `⚡ ¡Gastaste 1 espacio de ${s.label}! (${max - targetUsed}/${max} disponibles)`);
+  };
+
+  btnRecover.onclick = async () => {
+    if (currentUsed <= 0) return;
+    const targetUsed = currentUsed - 1;
+    await persistUsed(targetUsed, `↩️ ¡Recuperaste 1 espacio de ${s.label}! (${max - targetUsed}/${max} disponibles)`);
+  };
+
+  updateUI(currentUsed);
+}
+
+// Botón de restablecer ranuras
+const footer = container.createEl("div");
+footer.style.marginTop = "8px";
+footer.style.display = "flex";
+footer.style.justifyContent = "flex-end";
+
+const btnResetAll = footer.createEl("button", {
+  text: "🔄 Restablecer solo espacios",
+  cls: "btn-sm"
+});
+btnResetAll.style.cursor = "pointer";
+btnResetAll.onclick = async () => {
+  if (!renFile) return;
+  await app.fileManager.processFrontMatter(renFile, (fm) => {
+    if (!fm.espacios_conjuro) fm.espacios_conjuro = {};
+    fm.espacios_conjuro.nv1_usados = 0;
+    fm.espacios_conjuro.nv2_usados = 0;
+  });
+  new Notice("✨ ¡Todos los espacios de conjuro restablecidos al máximo!", 4000);
+};
+```
 
 ```meta-bind-button
 label: 🌙 Descanso Largo para Frater Ren
