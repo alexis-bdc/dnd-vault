@@ -40,7 +40,7 @@ esencias:
   Esencia Psicoactiva: 2
   Toxina Concentrada: 6
   Polvo Acre: 16
-  Polvo Inerte: 27
+  Polvo Inerte: 20
   Polvo Ígneo: 4
   Cristal Cinético: 2
   Sales de Choque: 6
