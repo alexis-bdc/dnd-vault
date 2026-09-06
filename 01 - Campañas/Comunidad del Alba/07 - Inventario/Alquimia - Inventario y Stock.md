@@ -20,7 +20,7 @@ consumibles:
   Poción de Respirar Agua: 0
   Poción de Forma Gaseosa: 0
   cabezal de fuerza: 3
-  cabezal de ácido: 1
+  cabezal de ácido: 0
   cabezal de fuego: 1
 bases_liquidas:
   Agua Fresca: 6
@@ -59,9 +59,13 @@ materias_primas:
   Cenizas y Turba Humosa: 0
 bandolera:
   ranura_1: Poción de Curación (2d4+2)
-  ranura_2: cabezal de ácido
+  ranura_2: Vacío
   ranura_3: Bomba Psicoledia
   ranura_4: cabezal de fuerza
+bandolera_pila:
+  ranura_1: Vacío
+  ranura_2: Vacío
+  ranura_3: Vacío
 tags:
   - dnd/bbdd
   - dnd/inventario

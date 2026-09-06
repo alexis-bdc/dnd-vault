@@ -345,7 +345,7 @@ actions:
 - 📖 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Libro en Lenguaje Feerico|Libro en Lenguaje Feérico]]:** Tomo rúnico rescatado en Zadash, actualmente en fase de estudio y descifrado.
 - 📜 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Rollo Magico Primordial|Rollo Mágico en Lenguaje Primordial]]:** Pergamino arcano en lengua elemental primordial para estudio.
 - 🎽 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Bandolera Tactica (4 Ranuras)|Bandolera Táctica (4 Ranuras — Equipada)]]:** Arnés equipado para uso rápido de consumibles con acción adicional.
-- 🎽 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Bandolera Tactica (3 Ranuras)|Bandolera Táctica (3 Ranuras — Reserva)]]:** En mochila, disponible para vender (~100 PO) o ceder a la party.
+- 🎽 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Bandolera Tactica (3 Ranuras)|Bandolera Táctica (3 Ranuras — Equipada por P.I.L.A.)]]:** Entregada y equipada a [[01 - Campañas/Comunidad del Alba/03 - NPCs/P.I.L.A.|P.I.L.A.]] para soporte táctico y uso rápido de consumibles.
 
 ### 🎒 Mochila y Posesiones
 - Paquete de explorador

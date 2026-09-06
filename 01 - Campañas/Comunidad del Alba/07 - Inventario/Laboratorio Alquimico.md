@@ -130,6 +130,113 @@ for (let i = 1; i <= 4; i++) {
 }
 ```
 
+### 🤖 Bandolera Táctica de P.I.L.A. (3 Ranuras — Acción Adicional)
+
+```dataviewjs
+const stockPath = "01 - Campañas/Comunidad del Alba/07 - Inventario/Alquimia - Inventario y Stock.md";
+const stockFile = app.vault.getAbstractFileByPath(stockPath);
+const pStock = dv.page(stockPath);
+const fmStock = (stockFile ? app.metadataCache.getFileCache(stockFile)?.frontmatter : null) || pStock?.file?.frontmatter || pStock || {};
+
+const consumibles = fmStock.consumibles || {};
+const bandoleraPila = fmStock.bandolera_pila || {};
+
+// Solo consumibles con stock > 0
+const availableItems = Object.keys(consumibles).filter(name => Number(consumibles[name]) > 0);
+
+const container = dv.el("div", "");
+container.setAttribute("contenteditable", "false");
+container.addEventListener("click", (e) => e.stopPropagation());
+container.addEventListener("mousedown", (e) => e.stopPropagation());
+container.addEventListener("dblclick", (e) => e.stopPropagation());
+
+const table = container.createEl("table", { cls: "dataview table-view-table" });
+const thead = table.createEl("thead");
+const hRow = thead.createEl("tr");
+["Ranura", "Objeto Equipado (P.I.L.A.)", "Acción de Combate"].forEach(text => {
+  hRow.createEl("th", { text, cls: "text-left" });
+});
+
+const tbody = table.createEl("tbody");
+
+for (let i = 1; i <= 3; i++) {
+  const slotKey = "ranura_" + i;
+  let equipped = bandoleraPila[slotKey] || "Vacío";
+  const currentStock = Number(consumibles[equipped]) || 0;
+
+  // Si lo asignado ya no existe en stock, pasa a Vacío
+  if (equipped !== "Vacío" && currentStock <= 0) {
+    equipped = "Vacío";
+    if (stockFile) {
+      app.fileManager.processFrontMatter(stockFile, (fm) => {
+        if (!fm.bandolera_pila) fm.bandolera_pila = {};
+        fm.bandolera_pila[slotKey] = "Vacío";
+      });
+    }
+  }
+
+  const row = tbody.createEl("tr");
+
+  // Col 1: Ranura
+  const tdSlot = row.createEl("td");
+  tdSlot.createEl("strong", { text: "Ranura " + i });
+
+  // Col 2: Selector dinámico
+  const tdSelect = row.createEl("td");
+  const select = tdSelect.createEl("select", { cls: "dropdown" });
+  select.style.cursor = "pointer";
+  select.style.padding = "4px 8px";
+  select.style.borderRadius = "4px";
+
+  const optVacio = select.createEl("option", { text: "⚪ Vacío / Sin Equipar", value: "Vacío" });
+  if (equipped === "Vacío") optVacio.selected = true;
+
+  for (const name of availableItems) {
+    const opt = select.createEl("option", { text: "🧪 " + name, value: name });
+    if (equipped === name) opt.selected = true;
+  }
+
+  select.onchange = async () => {
+    const chosen = select.value;
+    if (!stockFile) return;
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.bandolera_pila) fm.bandolera_pila = {};
+      fm.bandolera_pila[slotKey] = chosen;
+    });
+    new Notice("🤖 Ranura " + i + " (P.I.L.A.): " + chosen);
+  };
+
+  // Col 3: Botón de Uso Directo
+  const tdAction = row.createEl("td", { cls: "text-center" });
+  const isEquipped = equipped !== "Vacío" && currentStock > 0;
+  const btnUse = tdAction.createEl("button", {
+    text: "⚡ Usar (P.I.L.A. — Acción Adicional)",
+    cls: "mod-cta btn-sm"
+  });
+  btnUse.style.cursor = isEquipped ? "pointer" : "not-allowed";
+  btnUse.disabled = !isEquipped;
+
+  btnUse.onclick = async () => {
+    if (!isEquipped || !stockFile) return;
+
+    await app.fileManager.processFrontMatter(stockFile, (fm) => {
+      if (!fm.consumibles || !fm.consumibles[equipped] || fm.consumibles[equipped] < 1) {
+        new Notice("❌ No quedan unidades en stock de " + equipped);
+        return;
+      }
+
+      fm.consumibles[equipped] -= 1;
+      const rest = fm.consumibles[equipped];
+
+      if (!fm.bandolera_pila) fm.bandolera_pila = {};
+      fm.bandolera_pila[slotKey] = "Vacío";
+
+      new Notice("🤖⚡ ¡P.I.L.A. usó 1x \"" + equipped + "\" de la Ranura " + i + "!\n🎽 La Ranura " + i + " de P.I.L.A. ahora está VACÍA. (Stock restante: " + rest + ")", 5000);
+    });
+  };
+}
+```
+
 ---
 
 ## 🛠️ Panel de Alquimia Táctica (Acciones Rápidas)

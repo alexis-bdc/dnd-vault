@@ -67,12 +67,20 @@ tags:
 - Permite lanzar el hechizo **Palabra de Curación a Nivel 1** ($1d4 + 4$ PG) a 60 pies.
 - **Usos diarios:** 4 veces al día `[ ] [ ] [ ] [ ]`.
 
+### 🎽 Uso Rápido de Bandolera Táctica
+- Puede extraer y administrar o utilizar un consumible equipado en su [[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Bandolera Tactica (3 Ranuras)|Bandolera Táctica (3 Ranuras)]] como **Acción Adicional**.
+
 ---
 
 ## 🛡️ Reacciones
 
 ### 🛡️ Instinto Protector (Traspaso de Daño)
 - Cuando una criatura aliada conectada recibe daño, P.I.L.A. puede usar su **Reacción** para interceptar y absorber el impacto, transfiriéndose a sí mismo la cantidad de daño que desee (dejando su propia salud como mínimo en 1 PG).
+
+---
+
+## 🎒 Equipamiento y Objetos
+- 🎽 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Bandolera Tactica (3 Ranuras)|Bandolera Táctica (3 Ranuras — Equipada)]]:** Arnés táctico alquímico ajustado a su estructura metálica. Permite portar hasta 3 preparados o pociones ligeras y accionarlos como acción adicional.
 
 ---
 
