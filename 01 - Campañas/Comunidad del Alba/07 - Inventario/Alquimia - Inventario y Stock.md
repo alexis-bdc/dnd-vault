@@ -10,9 +10,9 @@ consumibles:
   Fuego de Alquimista (1d4/t): 0
   Veneno Básico (1d4): 2
   Incienso Místico (1d4 Nv 1): 2
-  Bomba de Humo (Ceguera): 0
+  Bomba de Humo (Ceguera): 1
   Bomba de Hedor (Fétida): 0
-  Bomba Psicoledia: 2
+  Bomba Psicoledia: 1
   Bomba Venenosa (1d4/t): 0
   Bomba de Peste (2d4 Necrótico): 0
   Bomba de Sueño (Letargo): 0
@@ -60,12 +60,12 @@ materias_primas:
 bandolera:
   ranura_1: Poción de Curación (2d4+2)
   ranura_2: Vacío
-  ranura_3: Bomba Psicoledia
+  ranura_3: Vacío
   ranura_4: cabezal de fuerza
 bandolera_pila:
-  ranura_1: Vacío
-  ranura_2: Vacío
-  ranura_3: Vacío
+  ranura_1: Poción de Curación (2d4+2)
+  ranura_2: Poción de Curación (2d4+2)
+  ranura_3: Bomba de Humo (Ceguera)
 tags:
   - dnd/bbdd
   - dnd/inventario
