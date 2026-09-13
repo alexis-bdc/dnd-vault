@@ -47,4 +47,4 @@ tags:
 ---
 
 ## 🎒 Objetos Notables
-- 
+- 💍 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Anillo de Proteccion Mental|Anillo de Protección Mental (Ring of Mind Shielding)]]:** *(Sintonizado)* Otorga inmunidad a efectos que lean pensamientos, detecten mentiras o determinen su alineamiento y tipo de criatura (a menos que lo permita). Comunicación telepática solo consentida. Puede volverse invisible a voluntad y albergar su alma si muere llevándolo puesto.

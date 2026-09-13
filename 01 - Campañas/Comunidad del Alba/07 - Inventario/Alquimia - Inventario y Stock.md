@@ -9,7 +9,7 @@ consumibles:
   Vial de Ácido (2d6): 2
   Fuego de Alquimista (1d4/t): 0
   Veneno Básico (1d4): 2
-  Incienso Místico (1d4 Nv 1): 2
+  Incienso Místico (1d4 Nv 1): 1
   Bomba de Humo (Ceguera): 1
   Bomba de Hedor (Fétida): 0
   Bomba Psicoledia: 1

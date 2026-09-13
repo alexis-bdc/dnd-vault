@@ -52,7 +52,7 @@ monedas:
   pc: 0
   pp: 2
   pe: 0
-  po: 3830
+  po: 3845
   ppt: 0
 espacios_conjuro:
   nv1_max: 4
@@ -335,8 +335,10 @@ actions:
 - **Arma principal:** Ballesta de Hermandad +1
 - **Arma secundaria:** Daga ligera
 - **Canalizador / Foco:** [[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Baston Foco de Recado|Bastón Foco de Recado]] (sintonizado), suministros de alquimista y herramientas de manitas
+- **Accesorio / Anillo:** [[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Anillo de Proteccion Mental|Anillo de Protección Mental]] (sintonizado)
 
 ### 🌀 Objetos Mágicos y Laboratorio
+- 💍 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Anillo de Proteccion Mental|Anillo de Protección Mental (Ring of Mind Shielding)]]:** *(Sintonizado)* Inmunidad a efectos mágicos que lean pensamientos, detecten mentiras o revelen alineamiento y tipo de criatura sin su permiso. Comunicación telepática solo con consentimiento. Puede volverse invisible a voluntad y albergar su alma al morir.
 - 🪄 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Baston Foco de Recado|Bastón Foco de Recado (Staff of Sending)]]:** *(Sintonizado)* Bastón arcano que actúa como foco de conjuros y permite canalizar el hechizo **Recado (Sending)** para comunicación mental a cualquier distancia.
 - 🌀 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Agujero Portatil|Agujero Portátil (Portable Hole)]]:** Pañuelo de seda circular que se despliega sobre una superficie sólida para abrir un pozo extradimensional de 6 pies de diámetro y 10 pies de profundidad.
 - ⚗️ **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Laboratorio Alquimico|Laboratorio Alquímico Portátil (Mesa de Crafteo y Reactivos)]]:** Instalación completa montada en el interior del Agujero Portátil, recientemente reconstruida en Zadash por 380 PO tras su pérdida en el cautiverio.
