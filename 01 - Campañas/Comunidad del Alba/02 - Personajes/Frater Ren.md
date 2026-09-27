@@ -74,7 +74,7 @@ tags:
   - dnd/pj
   - dnd/comunidad-del-alba
 ---
-# 🧪 Frater Ren
+ # 🧪 Frater Ren
 
 > [!statblock] **Gnomo de los Bosques — Artífice Alquimista (Nivel `VIEW[{nivel}][text]`)**
 > **Alineamiento:** `VIEW[{alineamiento}][text]` | **Trasfondo:** `VIEW[{trasfondo}][text]` (Rasgo: *Descubrimiento*)
