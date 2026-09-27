@@ -9,7 +9,7 @@ consumibles:
   Vial de Ácido (2d6): 2
   Fuego de Alquimista (1d4/t): 0
   Veneno Básico (1d4): 2
-  Incienso Místico (1d4 Nv 1): 1
+  Incienso Místico (1d4 Nv 1): 3
   Bomba de Humo (Ceguera): 1
   Bomba de Hedor (Fétida): 0
   Bomba Psicoledia: 1
@@ -23,7 +23,7 @@ consumibles:
   cabezal de ácido: 0
   cabezal de fuego: 1
 bases_liquidas:
-  Agua Fresca: 6
+  Agua Fresca: 4
   Agua Salada: 5
   Miel: 2
   Vino: 4
@@ -37,16 +37,16 @@ esencias:
   Extracto Vital: 8
   Extracto Mutagénico: 2
   Esencia Adaptativa: 4
-  Esencia Psicoactiva: 2
+  Esencia Psicoactiva: 8
   Toxina Concentrada: 6
   Polvo Acre: 16
   Polvo Inerte: 20
-  Polvo Ígneo: 4
+  Polvo Ígneo: 2
   Cristal Cinético: 2
-  Sales de Choque: 6
+  Sales de Choque: 4
   Vitriolo Corrosivo: 4
 materias_primas:
-  Hongos Feéricos de Zadash: 4
+  Hongos Feéricos de Zadash: 0
   Hierbas Medicinales Silvestres: 3
   Menas Sulfúricas y Rocas Ácidas: 2
   Hongo venenoso: 2

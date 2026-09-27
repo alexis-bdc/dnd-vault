@@ -80,7 +80,7 @@ tags:
 > **Alineamiento:** `VIEW[{alineamiento}][text]` | **Trasfondo:** `VIEW[{trasfondo}][text]` (Rasgo: *Descubrimiento*)
 > **CA:** `INPUT[number:ca]` *(Cuero tachonado +1 y Escudo)* | **Iniciativa:** +`INPUT[number:iniciativa]` | **Velocidad:** `VIEW[{velocidad}][text]`
 > **PG:** `INPUT[number:pg_actual]` / `INPUT[number:pg_max]` | **Bonif. Competencia:** +`VIEW[2 + floor(({nivel} - 1) / 4)][math]`
-> **Idiomas:** Común, Gnomo
+> **Idiomas:** Común, Gnomo, celestial, elfico?
 
 ---
 
