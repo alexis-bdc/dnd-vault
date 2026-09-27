@@ -300,7 +300,7 @@ actions:
 
 1. 🏹 **Arma Mejorada:** Concede un bonificador de **+1 a las tiradas de ataque y de daño** con un arma sencilla o marcial *(aumenta a +2 a nivel 10)*.
 2. 🛡️ **Defensa Mejorada:** Concede un bonificador de **+1 a la Clase de Armadura** mientras se lleva una armadura o escudo infusionado *(aumenta a +2 a nivel 10)*.
-3. 🎒 **Replicar Objeto Mágico: Bolsa de Contención (Bag of Holding):** Espacio extradimensional de hasta 500 lb / 64 pies cúbicos. Peso fijo de 15 lb.
+3. 🌀 **Replicar Objeto Mágico: [[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Agujero Portatil|Agujero Portátil (Portable Hole)]]:** Espacio extradimensional cilíndrico de 6 pies de diámetro y 10 pies de profundidad que se pliega como un pañuelo de seda.
 4. 🤖 **Sirviente Homúnculo (Homunculus Servant):** Requiere una gema/cristal de 100+ po como corazón. Crea un fiel autómata mágico volador que obedece tus órdenes.
 
 ---
@@ -340,7 +340,7 @@ actions:
 ### 🌀 Objetos Mágicos y Laboratorio
 - 💍 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Anillo de Proteccion Mental|Anillo de Protección Mental (Ring of Mind Shielding)]]:** *(Sintonizado)* Inmunidad a efectos mágicos que lean pensamientos, detecten mentiras o revelen alineamiento y tipo de criatura sin su permiso. Comunicación telepática solo con consentimiento. Puede volverse invisible a voluntad y albergar su alma al morir.
 - 🪄 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Baston Foco de Recado|Bastón Foco de Recado (Staff of Sending)]]:** *(Sintonizado)* Bastón arcano que actúa como foco de conjuros y permite canalizar el hechizo **Recado (Sending)** para comunicación mental a cualquier distancia.
-- 🌀 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Agujero Portatil|Agujero Portátil (Portable Hole)]]:** Pañuelo de seda circular que se despliega sobre una superficie sólida para abrir un pozo extradimensional de 6 pies de diámetro y 10 pies de profundidad.
+- 🌀 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Agujero Portatil|Agujero Portátil (Portable Hole)]]:** *(Infusión imbuida)* Pañuelo de seda circular que se despliega sobre una superficie sólida para abrir un pozo extradimensional de 6 pies de diámetro y 10 pies de profundidad.
 - ⚗️ **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Laboratorio Alquimico|Laboratorio Alquímico Portátil (Mesa de Crafteo y Reactivos)]]:** Instalación completa montada en el interior del Agujero Portátil, recientemente reconstruida en Zadash por 380 PO tras su pérdida en el cautiverio.
 - 🍶 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Vasija Alquimica|Vasija Alquímica (Alchemy Jug)]]:** Recipiente mágico capaz de producir líquidos diarios por orden (ácido, veneno básico, cerveza, vino, aceite, miel, mayonesa, agua dulce, agua salada, vinagre).
 - 🍄 **[[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Pocion de Psicodelia|Poción de Psicodelia (2 min)]]:** Vial de brebaje alucinógeno sensorial conservado en la bandolera.
