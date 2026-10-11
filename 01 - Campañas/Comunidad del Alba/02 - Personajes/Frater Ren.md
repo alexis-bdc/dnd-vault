@@ -56,7 +56,7 @@ monedas:
   ppt: 0
 espacios_conjuro:
   nv1_max: 4
-  nv1_usados: 2
+  nv1_usados: 3
   nv2_max: 2
   nv2_usados: 2
 conjuros_preparados:
