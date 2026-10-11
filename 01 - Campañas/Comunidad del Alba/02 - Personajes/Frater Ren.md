@@ -58,7 +58,7 @@ espacios_conjuro:
   nv1_max: 4
   nv1_usados: 0
   nv2_max: 2
-  nv2_usados: 0
+  nv2_usados: 1
 conjuros_preparados:
   - Palabra de Curación
   - Rayo Nauseabundo

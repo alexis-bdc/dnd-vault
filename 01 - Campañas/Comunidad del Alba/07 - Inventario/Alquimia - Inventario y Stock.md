@@ -3,7 +3,7 @@ tipo: bbdd_inventario
 campaña: Comunidad del Alba
 nombre: Base de Datos de Inventario y Stock Alquímico
 consumibles:
-  Poción de Curación (2d4+2): 2
+  Poción de Curación (2d4+2): 1
   Poción de Curación Mayor (4d4+4): 0
   Antitoxina: 1
   Vial de Ácido (2d6): 2
@@ -58,7 +58,7 @@ materias_primas:
   Sales Minerales Conductoras: 0
   Cenizas y Turba Humosa: 0
 bandolera:
-  ranura_1: Poción de Curación (2d4+2)
+  ranura_1: Vacío
   ranura_2: Vial de Ácido (2d6)
   ranura_3: cabezal de fuego
   ranura_4: cabezal de fuerza
