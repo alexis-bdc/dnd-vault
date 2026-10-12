@@ -8,7 +8,7 @@ genero: Masculino
 raza: Gnomo de los Bosques
 clase: Artífice
 subclase: Alquimista
-nivel: 5
+nivel: 6
 alineamiento: Legal Neutral
 trasfondo: Ermitaño
 rol_combate: Soporte Alquímico / Sanación Potenciada / Francotirador de Ballesta
@@ -16,7 +16,7 @@ estado: Activo
 iniciativa: 2
 ca: 17
 velocidad: 25 pies
-pg_max: 50
+pg_max: 60
 pg_actual: 7
 bonif_competencia: 3
 caracteristica_magica: int
@@ -56,9 +56,9 @@ monedas:
   ppt: 0
 espacios_conjuro:
   nv1_max: 4
-  nv1_usados: 3
+  nv1_usados: 0
   nv2_max: 2
-  nv2_usados: 2
+  nv2_usados: 0
 conjuros_preparados:
   - Palabra de Curación
   - Rayo Nauseabundo

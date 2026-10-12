@@ -3,8 +3,8 @@ tipo: bbdd_inventario
 campaña: Comunidad del Alba
 nombre: Base de Datos de Inventario y Stock Alquímico
 consumibles:
-  Poción de Curación (2d4+2): 1
-  Poción de Curación Mayor (4d4+4): 0
+  Poción de Curación (2d4+2): 0
+  Poción de Curación Mayor (4d4+4): 4
   Antitoxina: 1
   Vial de Ácido (2d6): 2
   Fuego de Alquimista (1d4/t): 0
@@ -23,7 +23,7 @@ consumibles:
   cabezal de ácido: 0
   cabezal de fuego: 1
 bases_liquidas:
-  Agua Fresca: 4
+  Agua Fresca: 0
   Agua Salada: 5
   Miel: 2
   Vino: 4
@@ -34,13 +34,13 @@ bases_liquidas:
   Ácido: 3
   Veneno Básico: 2
 esencias:
-  Extracto Vital: 8
+  Extracto Vital: 0
   Extracto Mutagénico: 2
   Esencia Adaptativa: 4
   Esencia Psicoactiva: 8
   Toxina Concentrada: 6
   Polvo Acre: 16
-  Polvo Inerte: 20
+  Polvo Inerte: 16
   Polvo Ígneo: 2
   Cristal Cinético: 2
   Sales de Choque: 4
@@ -58,13 +58,13 @@ materias_primas:
   Sales Minerales Conductoras: 0
   Cenizas y Turba Humosa: 0
 bandolera:
-  ranura_1: Vacío
+  ranura_1: Poción de Curación Mayor (4d4+4)
   ranura_2: Vial de Ácido (2d6)
   ranura_3: cabezal de fuego
   ranura_4: cabezal de fuerza
 bandolera_pila:
-  ranura_1: Poción de Curación (2d4+2)
-  ranura_2: Poción de Curación (2d4+2)
+  ranura_1: Poción de Curación Mayor (4d4+4)
+  ranura_2: Antitoxina
   ranura_3: Bomba de Humo (Ceguera)
 tags:
   - dnd/bbdd
