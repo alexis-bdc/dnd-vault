@@ -6,7 +6,7 @@ consumibles:
   Poción de Curación (2d4+2): 0
   Poción de Curación Mayor (4d4+4): 4
   Antitoxina: 1
-  Vial de Ácido (2d6): 2
+  Vial de Ácido (2d6): 1
   Fuego de Alquimista (1d4/t): 0
   Veneno Básico (1d4): 2
   Incienso Místico (1d4 Nv 1): 3
@@ -59,7 +59,7 @@ materias_primas:
   Cenizas y Turba Humosa: 0
 bandolera:
   ranura_1: Poción de Curación Mayor (4d4+4)
-  ranura_2: Vial de Ácido (2d6)
+  ranura_2: Vacío
   ranura_3: cabezal de fuego
   ranura_4: cabezal de fuerza
 bandolera_pila:
