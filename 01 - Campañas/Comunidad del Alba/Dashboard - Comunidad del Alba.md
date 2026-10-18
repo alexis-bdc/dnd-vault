@@ -672,3 +672,4 @@ FROM "01 - Campañas/Comunidad del Alba/07 - Inventario"
 WHERE tipo = "objeto" AND (contains(lower(string(categoria)), "consumible") OR contains(lower(string(categoria)), "poción") OR contains(lower(string(categoria)), "pocion"))
 SORT portador ASC, file.name ASC
 ```
+
