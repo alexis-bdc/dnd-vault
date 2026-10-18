@@ -17,7 +17,7 @@ iniciativa: 2
 ca: 17
 velocidad: 25 pies
 pg_max: 60
-pg_actual: 32
+pg_actual: 27
 bonif_competencia: 3
 caracteristica_magica: int
 fue: 12
