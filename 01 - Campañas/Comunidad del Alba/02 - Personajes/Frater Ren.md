@@ -14,10 +14,10 @@ trasfondo: Ermitaño
 rol_combate: Soporte Alquímico / Sanación Potenciada / Francotirador de Ballesta
 estado: Activo
 iniciativa: 2
-ca: 17
+ca: 16
 velocidad: 25 pies
 pg_max: 60
-pg_actual: 40
+pg_actual: 60
 bonif_competencia: 3
 caracteristica_magica: int
 fue: 12
