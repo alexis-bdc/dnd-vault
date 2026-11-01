@@ -181,6 +181,23 @@ const footer = container.createEl("div");
 footer.style.marginTop = "8px";
 footer.style.display = "flex";
 footer.style.justifyContent = "flex-end";
+footer.style.gap = "6px";
+
+const btnLongRest = footer.createEl("button", {
+  text: "🌙 Descanso Largo para Frater Ren",
+  cls: "mod-cta btn-sm"
+});
+btnLongRest.style.cursor = "pointer";
+btnLongRest.onclick = async () => {
+  if (!renFile) return;
+  await app.fileManager.processFrontMatter(renFile, (fm) => {
+    fm.pg_actual = fm.pg_max;
+    if (!fm.espacios_conjuro) fm.espacios_conjuro = {};
+    fm.espacios_conjuro.nv1_usados = 0;
+    fm.espacios_conjuro.nv2_usados = 0;
+  });
+  new Notice("🌙 ¡Descanso largo completado! PG y espacios de conjuro al máximo.", 4000);
+};
 
 const btnResetAll = footer.createEl("button", {
   text: "🔄 Restablecer solo espacios",
@@ -196,25 +213,6 @@ btnResetAll.onclick = async () => {
   });
   new Notice("✨ ¡Todos los espacios de conjuro restablecidos al máximo!", 4000);
 };
-```
-
-```meta-bind-button
-label: 🌙 Descanso Largo para Frater Ren
-icon: bed
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: 01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#pg_actual
-    evaluate: false
-    value: 50
-  - type: updateMetadata
-    bindTarget: 01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv1_usados
-    evaluate: false
-    value: 0
-  - type: updateMetadata
-    bindTarget: 01 - Campañas/Comunidad del Alba/02 - Personajes/Frater Ren.md#espacios_conjuro.nv2_usados
-    evaluate: false
-    value: 0
 ```
 
 ### 💰 Monedero Personal de Frater Ren
@@ -622,7 +620,7 @@ SORT actitud DESC, file.name ASC
 TABLE fecha_real AS "Fecha Real", lugar_fin AS "Destino/Fin"
 FROM "01 - Campañas/Comunidad del Alba/01 - Sesiones"
 WHERE tipo = "sesion"
-SORT file.name DESC
+SORT fecha_real DESC
 LIMIT 5
 ```
 
@@ -669,7 +667,7 @@ SORT portador ASC, file.name ASC
 ```dataview
 TABLE cantidad AS "Cant.", portador AS "Portador", categoria AS "Categoría", rareza AS "Rareza"
 FROM "01 - Campañas/Comunidad del Alba/07 - Inventario"
-WHERE tipo = "objeto" AND (contains(lower(string(categoria)), "consumible") OR contains(lower(string(categoria)), "poción") OR contains(lower(string(categoria)), "pocion"))
+WHERE tipo = "objeto" AND cantidad != 0 AND (contains(lower(string(categoria)), "consumible") OR contains(lower(string(categoria)), "poción") OR contains(lower(string(categoria)), "pocion"))
 SORT portador ASC, file.name ASC
 ```
 

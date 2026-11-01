@@ -58,12 +58,12 @@ recetas_alquimia:
       Sales de Choque: -1
       Polvo Acre: -1
       Bomba de Hedor (Fétida): 1
-  Bomba Psicoledia:
+  Bomba Psicodelia:
     descripcion: "Área 20 pies. Humo psicodélico que distorsiona la percepción feérica y sentidos."
     delta:
       Vinagre: -1
       Esencia Psicoactiva: -1
-      Bomba Psicoledia: 1
+      Bomba Psicodelia: 1
   Bomba Venenosa (1d4/t):
     descripcion: "Área 30 pies. Inflige 1d4 de daño de veneno continuo por asalto."
     delta:

@@ -1,11 +1,11 @@
 ---
 tipo: mision
-campaña: "Comunidad del Alba"
-estado: Activa
+campaña: Comunidad del Alba
+estado: Inactiva
 prioridad: Alta
-dada_por: "Investigación propia en Zadash"
+dada_por: Investigación propia en Zadash
 ubicacion: "[[01 - Campañas/Comunidad del Alba/05 - Lugares/Zadash|Zadash]]"
-recompensa: "Seguridad de Zadash / Desmantelar el aquelarre / Botín de Rina"
+recompensa: Seguridad de Zadash / Desmantelar el aquelarre / Botín de Rina
 tags:
   - dnd/mision
   - dnd/comunidad-del-alba

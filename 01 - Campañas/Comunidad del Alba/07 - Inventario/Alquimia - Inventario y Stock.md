@@ -12,7 +12,7 @@ consumibles:
   Incienso Místico (1d4 Nv 1): 3
   Bomba de Humo (Ceguera): 1
   Bomba de Hedor (Fétida): 0
-  Bomba Psicoledia: 1
+  Bomba Psicodelia: 1
   Bomba Venenosa (1d4/t): 0
   Bomba de Peste (2d4 Necrótico): 0
   Bomba de Sueño (Letargo): 0
