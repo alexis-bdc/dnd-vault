@@ -301,7 +301,7 @@ actions:
 1. 🏹 **Arma Mejorada:** Concede un bonificador de **+1 a las tiradas de ataque y de daño** con un arma sencilla o marcial *(aumenta a +2 a nivel 10)*.
 2. 🛡️ **Defensa Mejorada:** Concede un bonificador de **+1 a la Clase de Armadura** mientras se lleva una armadura o escudo infusionado *(aumenta a +2 a nivel 10)*.
 3. 🌀 **Replicar Objeto Mágico: [[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Agujero Portatil|Agujero Portátil (Portable Hole)]]:** Espacio extradimensional cilíndrico de 6 pies de diámetro y 10 pies de profundidad que se pliega como un pañuelo de seda.
-4. 🤖 **Sirviente Homúnculo (Homunculus Servant):** Requiere una gema/cristal de 100+ po como corazón. Crea un fiel autómata mágico volador que obedece tus órdenes.
+4. 🤖 **[[01 - Campañas/Comunidad del Alba/03 - NPCs/Sirviente Homunculo|Sirviente Homúnculo (Homunculus Servant)]]:** *(Activo)* Requiere una gema/cristal de 100+ po como corazón. Crea un fiel autómata mágico volador que obedece tus órdenes.
 
 ---
 
@@ -400,5 +400,5 @@ Tras rastrear y derrotar a la bruja Rina en Zadash, Ren acudió a la sede local 
 - [ ] **Rastro de Ozzley:** Investigar el paradero de [[01 - Campañas/Comunidad del Alba/03 - NPCs/Ozzley|Ozzley]] y descubrir qué ocurrió con él tras su partida de la comunidad natal.
 - [x] **Derrota de la Bruja Rina:** Desmantelar la red de la bruja [[01 - Campañas/Comunidad del Alba/03 - NPCs/Rina|Rina]] y sus [[01 - Campañas/Comunidad del Alba/08 - Lore/Hongos Feericos de Zadash|hongos feéricos]] en [[01 - Campañas/Comunidad del Alba/05 - Lugares/Zadash|Zadash]].
 - [ ] **Descifrar el Tomo Feérico:** Traducir con ayuda del Alma de Cobalto el [[01 - Campañas/Comunidad del Alba/07 - Inventario/Objetos/Libro en Lenguaje Feerico|Libro en Lenguaje Feérico]] recuperado de Rina.
-- [ ] **Deuda de Honor:** Devolver los **200 PO** prestados del tesoro de la *Comunidad del Alba*.
+- [x] **Deuda de Honor:** Devolver los **200 PO** prestados del tesoro de la *Comunidad del Alba*.
 - [ ] **Soporte Alquímico:** Fabricar elixires, pociones y bombas de alta eficiencia para mantener a la party a salvo.

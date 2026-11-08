@@ -19,7 +19,7 @@ consumibles:
   Poción de Trepar: 0
   Poción de Respirar Agua: 0
   Poción de Forma Gaseosa: 0
-  cabezal de fuerza: 3
+  cabezal de fuerza: 5
   cabezal de ácido: 0
   cabezal de fuego: 1
 bases_liquidas:
@@ -41,8 +41,8 @@ esencias:
   Toxina Concentrada: 6
   Polvo Acre: 16
   Polvo Inerte: 16
-  Polvo Ígneo: 2
-  Cristal Cinético: 2
+  Polvo Ígneo: 0
+  Cristal Cinético: 0
   Sales de Choque: 4
   Vitriolo Corrosivo: 4
 materias_primas:
