@@ -10,7 +10,7 @@ consumibles:
   Fuego de Alquimista (1d4/t): 0
   Veneno Básico (1d4): 2
   Incienso Místico (1d4 Nv 1): 3
-  Bomba de Humo (Ceguera): 1
+  Bomba de Humo (Ceguera): 0
   Bomba de Hedor (Fétida): 0
   Bomba Psicodelia: 1
   Bomba Venenosa (1d4/t): 0
@@ -65,7 +65,7 @@ bandolera:
 bandolera_pila:
   ranura_1: Poción de Curación Mayor (4d4+4)
   ranura_2: Antitoxina
-  ranura_3: Bomba de Humo (Ceguera)
+  ranura_3: Vacío
 tags:
   - dnd/bbdd
   - dnd/inventario
