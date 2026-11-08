@@ -59,7 +59,7 @@ materias_primas:
   Cenizas y Turba Humosa: 0
 bandolera:
   ranura_1: Poción de Curación Mayor (4d4+4)
-  ranura_2: Bomba de Humo (Ceguera)
+  ranura_2: Vacío
   ranura_3: cabezal de fuego
   ranura_4: cabezal de fuerza
 bandolera_pila:
