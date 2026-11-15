@@ -65,7 +65,7 @@ bandolera:
 bandolera_pila:
   ranura_1: Poción de Curación Mayor (4d4+4)
   ranura_2: Antitoxina
-  ranura_3: Vacío
+  ranura_3: Poción de Curación Mayor (4d4+4)
 tags:
   - dnd/bbdd
   - dnd/inventario
