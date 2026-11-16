@@ -4,7 +4,7 @@ campaña: Comunidad del Alba
 nombre: Base de Datos de Inventario y Stock Alquímico
 consumibles:
   Poción de Curación (2d4+2): 0
-  Poción de Curación Mayor (4d4+4): 4
+  Poción de Curación Mayor (4d4+4): 3
   Antitoxina: 1
   Vial de Ácido (2d6): 1
   Fuego de Alquimista (1d4/t): 0
