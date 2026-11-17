@@ -1,7 +1,6 @@
 ---
 tipo: dashboard
 rol: dm
-planarally_sala: "" # ej: http://planarally.localhost/game/tu-usuario/nombre-sala
 campaña: "Tierra de Bloques"
 tags:
   - dnd/dashboard
@@ -10,7 +9,7 @@ tags:
 
 # 🎲 Tierra de Bloques (DM)
 
-📘 [[Reglas de Supervivencia]] · 🧰 [[Recetas de Crafteo]]
+📘 [[Reglas de Supervivencia]] · 🧰 [[Recetas de Crafteo]] · 💚 [[Comercio y Equivalencias]]
 
 ## 🌗 Reloj del día
 **Día nº:** 1 · **Amenaza base:** 5 · **Era:** 🪵 Madera y piedra

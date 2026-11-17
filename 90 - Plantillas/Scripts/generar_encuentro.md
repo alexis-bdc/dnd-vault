@@ -120,7 +120,7 @@ estado: Preparado # Preparado / Jugado / Descartado
 sesion: "${sesionLink}"
 jugado_en: ""
 ubicacion: ""
-${tipo === "Combate" ? "enemigos_cr: []\nmapa: \"\"\nescena_planarally: \"\"\n" : ""}tags:
+${tipo === "Combate" ? "enemigos_cr: []\nmapa: \"\"\n" : ""}tags:
   - dnd/encuentro
   - dnd/dm
 ---

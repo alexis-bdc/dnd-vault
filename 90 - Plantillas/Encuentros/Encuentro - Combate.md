@@ -7,7 +7,6 @@ sesion: "" # sesión para la que está planeado: "[[Sesión 03]]"
 jugado_en: "" # se llena solo al marcarlo en la sesión
 ubicacion: ""
 mapa: "" # "[[cueva.jpg]]" (imagen en <campaña>/10 - Mapas/Encuentros/)
-escena_planarally: "" # nombre de la escena/ubicación en PlanarAlly
 dificultad_objetivo: Moderada # Baja / Moderada / Alta
 enemigos_cr: [] # un CR por enemigo, ej: ["1/4", "1/4", "1/4", 2]
 tags:

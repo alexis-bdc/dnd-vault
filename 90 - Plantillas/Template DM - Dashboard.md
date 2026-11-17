@@ -1,7 +1,6 @@
 ---
 tipo: dashboard
 rol: dm
-planarally_sala: "" # ej: http://planarally.localhost/game/tu-usuario/nombre-sala
 campaña: "<% tp.file.folder(true).includes('01 - Campañas') ? tp.file.folder(true).split('/')[1] : '' %>"
 tags:
   - dnd/dashboard

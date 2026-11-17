@@ -1,7 +1,6 @@
 ---
 tipo: dashboard
 rol: dm
-planarally_sala: "" # ej: http://planarally.localhost/game/tu-usuario/nombre-sala
 campaña: "Oneshoot 01"
 tags:
   - dnd/dashboard
