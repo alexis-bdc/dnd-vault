@@ -1,12 +1,13 @@
 ---
 tipo: dashboard
 rol: dm
-campaña: "Tierra de Bloques"
-reloj_horas: 7
+campaña: Tierra de Bloques
+reloj_horas: 7.04
 reloj_inicio: 0
 tags:
   - dnd/dashboard
   - dnd/dm
+hambre_hasta: 7
 ---
 
 # 🎲 Tierra de Bloques (DM)
