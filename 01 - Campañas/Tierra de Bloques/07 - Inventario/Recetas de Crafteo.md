@@ -14,7 +14,7 @@ Reglas generales en [[Reglas de Supervivencia]] · precios en [[Comercio y Equiv
 **Estaciones:**
 - ✋ **A mano:** acción, sin tirada.
 - 🪚 **Mesa de crafteo:** 10 min, sin tirada. Se puede cargar (1 ranura).
-- 🔥 **Horno:** 1 carbón cada 8 unidades, **1 tramo**. Se puede cargar (1 ranura).
+- 🔥 **Horno:** 1 carbón y **1 hora** cada 8 unidades. Se puede cargar (1 ranura).
 - 🔨 **Yunque / mesa de encantar / soporte de pociones:** ver cada sección. El yunque y las estanterías **no se transportan**, solo existen en aldeas y ruinas.
 
 ---
@@ -38,13 +38,13 @@ Reglas generales en [[Reglas de Supervivencia]] · precios en [[Comercio y Equiv
 
 | Objeto | Coste | Est. | Ranuras | Uso en juego |
 |---|---|---|---|---|
-| Antorcha ×4 | 1 palo + 1 carbón | ✋ | 1 (×16) | Luz 6 m. Zona sin apariciones. Dura 1 noche |
+| Antorcha ×4 | 1 palo + 1 carbón | ✋ | 1 (×16) | Luz 6 m. Zona sin apariciones. Dura 12 horas |
 | Linterna | 8 pepitas hierro + 1 antorcha | 🪚 | 1 | Luz 9 m, se cuelga del cinturón (manos libres), no se apaga |
 | Fogata | 3 palos + 3 troncos + 1 carbón | 🪚 | 1 | Cocina sin combustible. Luz 6 m. Humo visible a 1 km (señal… o delator) |
-| Cama | 3 lana + 3 tablones | 🪚 | 1 | Salta la noche, descanso largo, **fija la reaparición** |
+| Cama | 3 lana + 3 tablones | 🪚 | 1 | Dormir 8 h sin tiradas de aparición, **fija la reaparición** |
 | Cuenco ×4 | 3 tablones | 🪚 | 1 | Estofados |
 | Cubo | 3 lingotes hierro | 🪚 | 1 | Ver abajo |
-| Caña de pescar | 3 palos + 2 hilo | 🪚 | 1 | Pesca (Supervivencia CD 10, 1 tramo). En combate: tirar de una criatura Mediana 3 m (FUE enfrentada) |
+| Caña de pescar | 3 palos + 2 hilo | 🪚 | 1 | Pesca (Supervivencia CD 10, 2 h). En combate: tirar de una criatura Mediana 3 m (FUE enfrentada) |
 | Tijeras | 2 lingotes hierro | 🪚 | 1 | Lana sin matar ovejas, cortar telarañas como acción adicional |
 | Mechero | 1 lingote hierro + 1 pedernal | 🪚 | 1 | Prende fuego (1d4/turno a quien esté en la casilla), enciende portales. Durabilidad 5 |
 | Saco | 1 cuero + 2 hilo | 🪚 | 1 | Guarda hasta 4 tipos de material distintos en **una sola ranura** |
@@ -60,14 +60,13 @@ Reglas generales en [[Reglas de Supervivencia]] · precios en [[Comercio y Equiv
 
 ## 🧭 Orientación (clave para el juego nómada)
 
-| Objeto | Coste | Est. | Uso en juego |
-|---|---|---|---|
-| Brújula | 4 lingotes hierro + 1 redstone | 🪚 | Apunta a tu punto de reaparición. No puedes perderte en superficie |
-| Brújula imantada | Brújula + piedra imán | 🔨 | Apunta a **un hito** concreto (ver [[Reglas de Supervivencia#🎒 Juego nómada]]) |
-| Reloj | 4 lingotes oro + 1 redstone | 🪚 | Sabes el tramo del día bajo tierra y en el Nether |
-| Mapa vacío | 8 papel + 1 brújula | 🪚 | Mapea la región: ventaja en las tiradas para no perderse y −1 tramo al volver a viajar por ella |
-| Catalejo | 2 lingotes cobre + 1 amatista | 🪚 | Ventaja en Percepción a más de 30 m. Ves estructuras a 1 tramo de distancia |
-| Ojo de ender | 1 perla de ender + 1 polvo de blaze | ✋ | Se lanza y vuela hacia la Fortaleza del End. 1 de cada 5 se rompe (d20 ≤ 4) |
+| Objeto           | Coste                          | Est. | Uso en juego                                                                                        |
+| ---------------- | ------------------------------ | ---- | --------------------------------------------------------------------------------------------------- |
+| Brújula          | 4 lingotes hierro + 1 redstone | 🪚   | Apunta a tu punto de reaparición. No puedes perderte en superficie                                  |
+| Brújula imantada | Brújula + piedra imán          | 🔨   | Apunta a **un hito** concreto (ver [[Juego Nómada#Hitos (sustituyen a la base)|Juego nómada]])                     |
+| Reloj            | 4 lingotes oro + 1 redstone    | 🪚   | Sabes la hora exacta bajo tierra y en el Nether                                                     |
+| Catalejo         | 2 lingotes cobre + 1 amatista  | 🪚   | Ventaja en Percepción a más de 30 m. Ves estructuras a 4 horas de viaje                             |
+
 
 ---
 
@@ -143,22 +142,22 @@ Set completo: casco, peto, grebas y botas. Cada pieza que falte resta 1 a la CA.
 ## ✨ Encantamientos
 
 **Mesa de encantamientos:** 1 libro + 2 diamantes + 4 obsidiana. Es portátil (1 ranura).
-Encantar cuesta **1 tramo + lapislázuli (1–3) + Experiencia de Encantar (XE)**.
+Encantar a nivel $n$cuesta **$2^{n-1}$ hr/$n$ +  $n$ lapislázuli + Experiencia de Encantar (XE)**.
 
 > **XE:** cada PJ gana 1 XE por combate superado y 1 por recolección con éxito. No afecta a la XP de 5e. Se pierde toda al morir.
 
-| Encantamiento | Coste | Efecto |
-|---|---|---|
-| Afilado I / II | 1 lapis + 3 XE / 2 lapis + 6 XE | Arma: +1 / +2 a ataque y daño |
-| Protección I / II | 1 lapis + 3 XE / 2 lapis + 6 XE | Armadura: +1 / +2 CA |
-| Eficiencia | 1 lapis + 3 XE | Herramienta: ventaja en recolección |
-| Irrompibilidad | 2 lapis + 4 XE | Durabilidad ×2 |
-| Aspecto ígneo / Llama | 2 lapis + 5 XE | Espada / arco: +1d4 fuego |
-| Retroceso / Empuje | 1 lapis + 3 XE | Al impactar, empujas 3 m |
-| Caída de pluma | 1 lapis + 3 XE | Botas: mitad de daño por caída |
-| Respiración / Afinidad acuática | 1 lapis + 3 XE | Casco: +10 min de aire, sin desventaja al atacar bajo el agua |
-| Fortuna | 3 lapis + 8 XE | Pico: el rendimiento de la recolección sube una fila |
-| Reparación | 3 lapis + 10 XE | Recupera 1 de durabilidad en cada descanso largo |
+| Encantamiento                   | Coste                                            | Efecto                                                        |
+| ------------------------------- | ------------------------------------------------ | ------------------------------------------------------------- |
+| Afilado I / II / III            | 1 lapis + 3 XE / 2 lapis + 6 XE / 3 lapis + 9 XE | Arma: +1 / +2 / +3 a ataque y daño                            |
+| Protección I / II               | 1 lapis + 3 XE / 2 lapis + 6 XE                  | Armadura: +1 / +2 CA                                          |
+| Eficiencia                      | 1 lapis + 3 XE                                   | Herramienta: ventaja en recolección                           |
+| Irrompibilidad                  | 2 lapis + 4 XE                                   | Durabilidad ×2                                                |
+| Aspecto ígneo / Llama           | 2 lapis + 5 XE                                   | Espada / arco: +1d4 fuego                                     |
+| Retroceso / Empuje              | 1 lapis + 3 XE                                   | Al impactar, empujas 3 m                                      |
+| Caída de pluma                  | 1 lapis + 3 XE                                   | Botas: mitad de daño por caída                                |
+| Respiración / Afinidad acuática | 1 lapis + 3 XE                                   | Casco: +10 min de aire, sin desventaja al atacar bajo el agua |
+| Fortuna                         | 3 lapis + 8 XE                                   | Pico: el rendimiento de la recolección sube una fila          |
+| Reparación                      | 3 lapis + 10 XE                                  | Recupera 1 de durabilidad en cada descanso largo              |
 
 **Bibliotecas:** si encantas rodeado de 3 estanterías o más, el coste baja 1 XE por cada 3 (mínimo 1). Las estanterías solo existen en aldeas y ruinas, así que encantar barato obliga a viajar.
 
@@ -166,7 +165,7 @@ Encantar cuesta **1 tramo + lapislázuli (1–3) + Experiencia de Encantar (XE)*
 
 ## 🧪 Pociones
 
-**Soporte para pociones:** 1 vara de blaze + 3 piedra. Portátil (1 ranura). Combustible: polvo de blaze (1 por cada 3 tandas). **1 tramo** por tanda de 3.
+**Soporte para pociones:** 1 vara de blaze + 3 piedra. Portátil (1 ranura). Combustible: polvo de blaze (1 por cada 3 tandas). **1 hora** por tanda de 3.
 
 Botella de agua + verruga del Nether = **poción rara**. Después se añade un ingrediente:
 
@@ -188,7 +187,7 @@ Botella de agua + verruga del Nether = **poción rara**. Después se añade un i
 
 ## 🍞 Comida que merece la pena craftear
 
-Valores de hambre en [[Reglas de Supervivencia#🍖 Hambre]].
+Valores de hambre en [[Hambre]].
 
 | Comida | Coste | Est. | Ranuras |
 |---|---|---|---|

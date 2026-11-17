@@ -2,6 +2,8 @@
 tipo: dashboard
 rol: dm
 campaña: "Tierra de Bloques"
+reloj_horas: 7
+reloj_inicio: 0
 tags:
   - dnd/dashboard
   - dnd/dm
@@ -12,12 +14,13 @@ tags:
 📘 [[Reglas de Supervivencia]] · 🧰 [[Recetas de Crafteo]] · 💚 [[Comercio y Equivalencias]]
 
 ## 🌗 Reloj del día
-**Día nº:** 1 · **Amenaza base:** 5 · **Era:** 🪵 Madera y piedra
+```dataviewjs
+await dv.view("90 - Plantillas/Scripts/reloj-dia")
+```
 
-- [ ] 🌅 Amanecer
-- [ ] ☀️ Día
-- [ ] 🌇 Atardecer
-- [ ] 🌙 Noche (¿han dormido en cama?)
+**Amenaza base:** 5 · **Era:** 🪵 Madera y piedra
+
+> 🌅 06–07 · ☀️ 07–18 · 🌇 18–19 · 🌙 19–06 (tirada cada 2 h) · 😴 dormir = 8 h
 
 ---
 
