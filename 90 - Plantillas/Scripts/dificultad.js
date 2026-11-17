@@ -25,4 +25,7 @@ if (crs.length) {
 
 const obj = L.DIFICULTADES.includes(cur.dificultad_objetivo) ? cur.dificultad_objetivo : "Moderada";
 dv.paragraph(`**Combinaciones para dificultad ${obj}** (${p[obj]} XP):`);
-dv.table(["Opción", "XP"], L.opciones(p[obj]).map((o) => [o.desc, o.xp]));
+const porCR = L.mobsPorCR(raiz);
+const hayMobs = Object.keys(porCR).length > 0;
+dv.table(["Opción", "XP", ...(hayMobs ? ["Mobs de la campaña"] : [])],
+  L.opciones(p[obj]).map((o) => [o.desc, o.xp, ...(hayMobs ? [L.mobsDeOpcion(o, porCR) || "—"] : [])]));

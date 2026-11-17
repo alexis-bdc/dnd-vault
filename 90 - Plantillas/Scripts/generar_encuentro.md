@@ -41,6 +41,7 @@ if (tipo === "Combate") {
   if (!dif) return;
   const p = L.presupuesto(niveles);
   const ops = L.opciones(p[dif]);
+  const porCR = L.mobsPorCR(raiz);
   fm.dificultad_objetivo = dif;
   cuerpo = `## 🗺️ Mapa
 \`\`\`dataviewjs
@@ -50,7 +51,7 @@ await dv.view("90 - Plantillas/Scripts/mapa-encuentro")
 ## ⚔️ Enemigos
 > Presupuesto ${dif}: **${p[dif]} XP** para ${niveles.length} PJ (nv ${niveles.join(", ")}). Elige una combinación y llena \`enemigos_cr\`.
 
-${ops.map((o) => `- ${o.desc} (${o.xp} XP)`).join("\n")}
+${ops.map((o) => { const m = L.mobsDeOpcion(o, porCR); return `- ${o.desc} (${o.xp} XP)` + (m ? ` → 🧟 ${m}` : ""); }).join("\n")}
 
 \`\`\`dataviewjs
 await dv.view("90 - Plantillas/Scripts/dificultad")

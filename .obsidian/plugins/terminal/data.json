@@ -3,10 +3,12 @@
   "addToContextMenu": true,
   "createInstanceNearExistingOnes": true,
   "errorNoticeTimeout": 0,
+  "experiments": {},
   "exposeInternalModules": true,
   "focusOnNewInstance": true,
   "hideStatusBar": "focused",
   "showTerminalTabPrefix": false,
+  "tabStatus": "animated",
   "interceptKeysWhenFocused": true,
   "interceptLogging": true,
   "keymappings": [
@@ -139,6 +141,9 @@
   "openChangelogOnUpdate": true,
   "pinNewInstance": true,
   "preferredRenderer": "dom",
+  "prewarmConPty": true,
+  "windowsTerminalConsoleHost": true,
+  "pythonExecutable": "",
   "profiles": {
     "linuxExternalDefault": {
       "args": [],
@@ -185,7 +190,7 @@
         "documentOverride": null
       },
       "type": "integrated",
-      "useWin32Conhost": true
+      "win32Backend": "conpty"
     }
   },
   "defaultProfile": "linuxIntegratedDefault",

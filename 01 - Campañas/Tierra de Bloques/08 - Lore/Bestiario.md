@@ -10,22 +10,28 @@ tags:
 
 ↩ [[Reglas de Supervivencia]]
 
-| Mob | Usa | Ajuste |
-|---|---|---|
-| Zombi | *Zombie* | Arde al sol |
-| Esqueleto | *Skeleton* | Arde al sol |
-| Araña | *Giant Wolf Spider* | Neutral de día |
-| Ahogado | *Zombie* | Nada 9 m, a veces tridente (1d8+1, alcance 6/18 m) |
-| Bruja | *Green / Night / Sea Hag* | Ver [[#Brujas]]: arpías con pociones |
-| Enderman | *Displacer Beast* sin desplazamiento | Teletransporte 9 m como reacción; hostil si le miras a los ojos (TS SAB CD 12 al verlo) |
-| Creeper | Ver abajo | |
+Cada mob tiene su nota con statblock del plugin en [[#📚 Statblocks|Mobs/]]. En un encuentro se usan con:
 
-## Creeper
-*Monstruosidad Mediana*, CA 12, PG 13 (3d8), Vel 9 m
-FUE 8 · DES 14 · CON 12 · INT 3 · SAB 10 · CAR 3. Sigilo +4. VD 1/2.
-- **Siseo.** Si empieza su turno a 1,5 m de una criatura, sisea (todos lo oyen). Al inicio de su siguiente turno, si sigue ahí, **explota**.
-- **Explosión.** Radio 3 m: TS DES CD 12, 3d8 contundente (mitad si supera). Destruye muros improvisados y objetos colocados (fogata, mesa, cama) en el área. El creeper muere.
-- **Recular.** Si recibe daño mientras sisea, el siseo se cancela.
+```statblock
+monster: Zombi
+```
+
+## 📚 Statblocks
+
+| VD | Mob | Dónde aparece |
+|---|---|---|
+| 1/4 | [[Zombi]] · [[Esqueleto]] · [[Araña]] · [[Ahogado]] | Superficie de noche, cuevas, ríos |
+| 1/2 | [[Creeper Joven]] · [[Saqueador]] | Hierba y bosques · patrullas, aldeas |
+| 1 | [[Creeper]] · [[Piglin Zombificado]] | Superficie (nivel 3+) · Nether |
+| 3 | [[Capitán de Saqueadores]] · [[Esqueleto Wither]] | Incursiones · fortaleza del Nether |
+| 5 | [[Devastador]] · [[Blaze]] | Incursiones · fortaleza del Nether |
+| 7 | [[Enderman]] | Cualquier lugar de noche, el End |
+| 9 | [[Ghast]] | Nether |
+| 16 | [[Wither]] | Jefe invocado |
+| 20 | [[Warden]] | Oscuridad Profunda |
+| 26 | [[Dragón del End]] | Jefe final |
+
+Las brujas usan los statblocks de las hags del SRD (ver abajo).
 
 ---
 

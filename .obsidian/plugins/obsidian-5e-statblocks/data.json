@@ -3,7 +3,7 @@
   "defaultLayouts": {},
   "layouts": [],
   "default": "basic-5e-layout",
-  "useDice": true,
+  "useDice": false,
   "renderDice": false,
   "export": true,
   "showAdvanced": false,
@@ -15,7 +15,7 @@
   "paths": [
     "/"
   ],
-  "autoParse": false,
+  "autoParse": true,
   "disableSRD": false,
   "tryToRenderLinks": true,
   "debug": false,

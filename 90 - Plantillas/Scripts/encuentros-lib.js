@@ -55,14 +55,30 @@ function opciones(budget) {
   const filas = [];
   for (const n of [1, 2, 3, 4, 5, 6, 8]) {
     const m = mejorCR(budget, n);
-    if (m) filas.push({ desc: `${n} × CR ${m.cr}`, xp: m.xp * n });
+    if (m) filas.push({ desc: `${n} × CR ${m.cr}`, xp: m.xp * n, crs: [m.cr] });
   }
   const jefe = mejorCR(budget * 0.6, 1);
   if (jefe) {
     const sec = mejorCR(budget - jefe.xp, 4);
-    if (sec) filas.push({ desc: `Jefe CR ${jefe.cr} + 4 × CR ${sec.cr}`, xp: jefe.xp + sec.xp * 4 });
+    if (sec) filas.push({ desc: `Jefe CR ${jefe.cr} + 4 × CR ${sec.cr}`, xp: jefe.xp + sec.xp * 4, crs: [jefe.cr, sec.cr] });
   }
   return filas;
+}
+
+// Bestiario propio de la campaña: notas con `statblock: true` (plugin Fantasy Statblocks) dentro de `raiz`. { "1/4": ["Zombi", ...] }
+function mobsPorCR(raiz) {
+  const out = {};
+  for (const f of app.vault.getMarkdownFiles()) {
+    if (!f.path.startsWith(raiz + "/")) continue;
+    const fm = app.metadataCache.getFileCache(f)?.frontmatter;
+    if (fm?.statblock && fm.name && fm.cr != null) (out[String(fm.cr).trim()] ??= []).push(fm.name);
+  }
+  return out;
+}
+
+// Texto "Zombi, Esqueleto / Creeper" con los mobs de los CR de una opción ("" si no hay ninguno)
+function mobsDeOpcion(o, porCR) {
+  return o.crs.map((c) => (porCR[c] ?? []).join(", ")).filter(Boolean).join(" / ");
 }
 
 // 0: nv 1-4, 1: 5-10, 2: 11-16, 3: 17-20
@@ -160,4 +176,4 @@ const TABLAS = {
   ],
 };
 
-return { CR_XP, PRESUPUESTO, DIFICULTADES, xpDeCR, presupuesto, calificar, mejorCR, opciones, tier, TRAMPA_CD, TRAMPA_DANO, pick, TABLAS };
+return { CR_XP, PRESUPUESTO, DIFICULTADES, xpDeCR, presupuesto, calificar, mejorCR, opciones, mobsPorCR, mobsDeOpcion, tier, TRAMPA_CD, TRAMPA_DANO, pick, TABLAS };
