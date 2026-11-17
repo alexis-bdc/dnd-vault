@@ -23,7 +23,7 @@ Cada día tiene **24 horas**. El DM lleva la hora en el [[Dashboard - Tierra de 
 
 | Actividad | Horas |
 |---|---|
-| Viajar a otra zona (a pie) | 4 |
+| Viajar a pie (medir en el [[Mapa del Mundo]]) | 1 cada 500 bloques (½ a caballo) |
 | Talar / cosechar | 1 |
 | Minar, cazar, pescar | 2 |
 | Fundir en el horno | 1 por cada 8 unidades |

@@ -10,3 +10,7 @@ Thumbs.db
 
 # Tokens con imágenes de Minecraft (Mojang): solo uso privado, no se suben al repo público
 01 - Campañas/Tierra de Bloques/10 - images/Tokens/
+
+# Herramienta de mapas: librería clonada y binario compilado (se regeneran solos)
+.tools/cubiomes/
+.tools/mapa-mundo/mapa
