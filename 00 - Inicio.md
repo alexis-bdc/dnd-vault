@@ -10,17 +10,14 @@ Bienvenido a tu base central para la gestión y seguimiento de campañas de D&D.
 
 ---
 
-## 🧭 Campañas Activas
+## 🧭 Campañas
 
 ```dataview
-TABLE file.folder AS "Ubicación"
+LIST rol
 FROM "01 - Campañas"
 WHERE tipo = "dashboard"
 SORT file.name ASC
 ```
-
-- 🦅 **[[01 - Campañas/Bilbo Volador/Dashboard - Bilbo Volador|Campaña: Bilbo Volador]]**
-- 🌅 **[[01 - Campañas/Comunidad del Alba/Dashboard - Comunidad del Alba|Campaña: Comunidad del Alba]]**
 
 ---
 
@@ -30,11 +27,24 @@ SORT file.name ASC
 
 ---
 
-## 📑 Plantillas Rápidas (`90 - Plantillas/`)
-- 📜 [[90 - Plantillas/Template - Sesion|Template - Sesión]]
-- 👥 [[90 - Plantillas/Template - NPC|Template - NPC]]
-- 🎯 [[90 - Plantillas/Template - Mision|Template - Misión]]
-- 🏰 [[90 - Plantillas/Template - Lugar|Template - Lugar]]
-- 🎒 [[90 - Plantillas/Template - Item|Template - Objeto]]
-- 🛡️ [[90 - Plantillas/Template - Faccion|Template - Facción]]
-- 👤 [[90 - Plantillas/Template - Personaje Jugador|Template - Personaje Jugador]]
+## 📑 Plantillas como jugador (`90 - Plantillas/`)
+- 📜 [[90 - Plantillas/Template - Sesion|Sesión]]
+- 👤 [[90 - Plantillas/Template - Personaje Jugador|Personaje Jugador]]
+- 🛡️ [[90 - Plantillas/Template - Compañero|Compañero]]
+- 👥 [[90 - Plantillas/Template - NPC|NPC]]
+
+## 🎲 Plantillas como DM
+- 🧭 [[90 - Plantillas/Template DM - Dashboard|Dashboard de campaña]]
+- 📜 [[90 - Plantillas/Template DM - Sesion|Sesión (preparación + registro)]]
+- 👤 [[90 - Plantillas/Template DM - PJ|PJ (vista DM)]]
+- 👥 [[90 - Plantillas/Template DM - NPC|NPC (con secretos)]]
+- ⚔️ [[90 - Plantillas/Encuentros/Encuentro - Combate|Encuentro: Combate]]
+- 💬 [[90 - Plantillas/Encuentros/Encuentro - Social|Encuentro: Social]]
+- 🗺️ [[90 - Plantillas/Encuentros/Encuentro - Exploracion y Trampa|Encuentro: Exploración / Trampa]]
+- 🧩 [[90 - Plantillas/Encuentros/Encuentro - Puzle|Encuentro: Puzle]]
+
+## 🧰 Compartidas
+- 🎯 [[90 - Plantillas/Template - Mision|Misión]]
+- 🏰 [[90 - Plantillas/Template - Lugar|Lugar]]
+- 🎒 [[90 - Plantillas/Template - Item|Objeto]]
+- 🛡️ [[90 - Plantillas/Template - Faccion|Facción]]

@@ -16,7 +16,6 @@ ca: 10
 velocidad: "30 pies"
 pg_max: 10
 pg_actual: 10
-bonif_competencia: 2
 
 # Característica de Lanzamiento de Conjuros: int, sab, car (deja vacío si no lanza conjuros)
 caracteristica_magica: "int"
@@ -101,10 +100,10 @@ tags:
 
 | Estadística Mágica | Fórmula | Valor Actual |
 | :--- | :--- | :---: |
-| **Atributo de Conjuración** | Inteligencia / Sabiduría / Carisma | `VIEW[{int}][text]` (Mod: **+`VIEW[floor(({int} - 10) / 2)][math]`**) |
-| **CD de Salvación de Conjuros** | `8 + Competencia + Mod INT` | **CD `VIEW[8 + (2 + floor(({nivel} - 1) / 4)) + floor(({int} - 10) / 2)][math]`** |
-| **Bonificador de Ataque de Conjuro** | `Competencia + Mod INT` | **+`VIEW[(2 + floor(({nivel} - 1) / 4)) + floor(({int} - 10) / 2)][math]`** |
-| **Máximo de Conjuros Preparados** | `Nivel + Mod INT` | **`VIEW[{nivel} + floor(({int} - 10) / 2)][math]`** conjuros |
+| **Atributo de Conjuración** | `caracteristica_magica` | `$= const c = dv.current(), k = c.caracteristica_magica; k ? k.toUpperCase() + " " + c[k] + " (Mod " + Math.floor((c[k] - 10) / 2) + ")" : "No lanza conjuros"` |
+| **CD de Salvación de Conjuros** | `8 + Competencia + Mod` | `$= const c = dv.current(), k = c.caracteristica_magica; k ? "CD " + (8 + (2 + Math.floor((c.nivel - 1) / 4)) + Math.floor((c[k] - 10) / 2)) : "—"` |
+| **Bonificador de Ataque de Conjuro** | `Competencia + Mod` | `$= const c = dv.current(), k = c.caracteristica_magica; k ? "+" + ((2 + Math.floor((c.nivel - 1) / 4)) + Math.floor((c[k] - 10) / 2)) : "—"` |
+| **Máximo de Conjuros Preparados** | `Nivel + Mod` (según clase) | `$= const c = dv.current(), k = c.caracteristica_magica; k ? (c.nivel + Math.floor((c[k] - 10) / 2)) + " conjuros" : "—"` |
 
 ---
 
@@ -137,18 +136,8 @@ label: 🌙 Descanso Largo (Restablecer PG y Espacios)
 icon: bed
 style: primary
 actions:
-  - type: updateMetadata
-    bindTarget: pg_actual
-    evaluate: false
-    value: 10
-  - type: updateMetadata
-    bindTarget: espacios_conjuro.nv1_usados
-    evaluate: false
-    value: 0
-  - type: updateMetadata
-    bindTarget: espacios_conjuro.nv2_usados
-    evaluate: false
-    value: 0
+  - type: runTemplaterFile
+    templateFile: 90 - Plantillas/Scripts/descanso_largo.md
 ```
 
 ---

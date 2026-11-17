@@ -137,18 +137,8 @@ label: 🌙 Descanso Largo (Restablecer PG y Espacios)
 icon: bed
 style: primary
 actions:
-  - type: updateMetadata
-    bindTarget: pg_actual
-    evaluate: false
-    value: 50
-  - type: updateMetadata
-    bindTarget: espacios_conjuro.nv1_usados
-    evaluate: false
-    value: 0
-  - type: updateMetadata
-    bindTarget: espacios_conjuro.nv2_usados
-    evaluate: false
-    value: 0
+  - type: runTemplaterFile
+    templateFile: 90 - Plantillas/Scripts/descanso_largo.md
 ```
 
 ---

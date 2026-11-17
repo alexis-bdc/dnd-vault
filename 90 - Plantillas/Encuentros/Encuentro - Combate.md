@@ -1,0 +1,52 @@
+---
+tipo: encuentro
+tipo_encuentro: Combate
+campaña: "<% tp.file.folder(true).includes('01 - Campañas') ? tp.file.folder(true).split('/')[1] : '' %>"
+estado: Preparado # Preparado / Jugado / Descartado
+sesion: "" # "[[Sesión 03 - ...]]"
+ubicacion: ""
+dificultad_objetivo: Moderada # Baja / Moderada / Alta
+enemigos_cr: [] # un CR por enemigo, ej: ["1/4", "1/4", "1/4", 2]
+tags:
+  - dnd/encuentro
+  - dnd/dm
+---
+
+# ⚔️ <% tp.file.title %>
+
+## 📊 Dificultad
+```dataviewjs
+await dv.view("90 - Plantillas/Scripts/dificultad")
+```
+
+## 🎯 Situación
+- **Por qué pelean / qué quieren los enemigos:** 
+- **Cómo empieza (emboscada, negociación que sale mal, los PJ atacan…):** 
+
+## 👹 Enemigos
+| Enemigo | Cant. | CR | CA | PG | Notas |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+|  |  |  |  |  |  |
+
+> Statblock del SRD (nombre en inglés, ej. Goblin):
+> ```statblock
+> monster: Goblin
+> ```
+
+## 🗺️ Terreno (2-3 rasgos)
+- 
+
+## 🧠 Tácticas
+- **Al empezar:** 
+- **Si van perdiendo (mitad de PG / líder caído):** 
+
+## 🌀 Complicación (ronda 2-3)
+- 
+
+## 💰 Botín
+> Marca lo que se llevaron.
+- [ ] 
+- [ ] 
+
+## 📝 Resultado
+- 

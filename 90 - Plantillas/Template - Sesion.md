@@ -10,7 +10,7 @@ tags:
   - dnd/sesion
 ---
 
-# Sesión <% tp.file.title %>
+# <% tp.file.title %>
 
 > [!abstract] Resumen Rápido
 > Escribe aquí 2-3 líneas resumiendo lo más relevante de la sesión.

@@ -1,6 +1,7 @@
 ---
 tipo: dashboard
 campaña: "Bilbo Volador"
+pj_panel: "01 - Campañas/Bilbo Volador/02 - Personajes/Moxy.md"
 tags:
   - dnd/dashboard
 ---
@@ -10,7 +11,7 @@ tags:
 > [!nav] **Navegación Rápida**
 > 📜 [[01 - Campañas/Bilbo Volador/01 - Sesiones/|01 - Sesiones]] • 🛡️ [[01 - Campañas/Bilbo Volador/02 - Personajes/|02 - Personajes]] • 👥 [[01 - Campañas/Bilbo Volador/03 - NPCs/|03 - NPCs]]
 > 🎯 [[01 - Campañas/Bilbo Volador/04 - Misiones/|04 - Misiones]] • 🏰 [[01 - Campañas/Bilbo Volador/05 - Lugares/|05 - Lugares]] • 🎪 [[01 - Campañas/Bilbo Volador/06 - Facciones/|06 - Facciones]]
-> 🎒 [[01 - Campañas/Bilbo Volador/07 - Inventario/|07 - Inventario]] • 📖 [[01 - Campañas/Bilbo Volador/08 - Lore/|08 - Lore]]
+> 🎒 [[01 - Campañas/Bilbo Volador/07 - Inventario/|07 - Inventario]]
 
 ---
 
@@ -31,18 +32,8 @@ label: 🌙 Descanso Largo para Moxy
 icon: bed
 style: primary
 actions:
-  - type: updateMetadata
-    bindTarget: 01 - Campañas/Bilbo Volador/02 - Personajes/Moxy.md#pg_actual
-    evaluate: false
-    value: 21
-  - type: updateMetadata
-    bindTarget: 01 - Campañas/Bilbo Volador/02 - Personajes/Moxy.md#espacios_conjuro.nv1_usados
-    evaluate: false
-    value: 0
-  - type: updateMetadata
-    bindTarget: 01 - Campañas/Bilbo Volador/02 - Personajes/Moxy.md#espacios_conjuro.nv2_usados
-    evaluate: false
-    value: 0
+  - type: runTemplaterFile
+    templateFile: 90 - Plantillas/Scripts/descanso_largo.md
 ```
 
 ### 💰 Monedero Personal de Moxy
