@@ -5,6 +5,7 @@ tipo_lugar: Ciudad # Ciudad / Pueblo / Mazmorra / Taberna / Tienda / Región
 region: ""
 gobernante: ""
 faccion_control: ""
+# location: [y, x]  # descomenta para que aparezca en el Mapa del Mundo (Leaflet)
 peligro: Bajo # Seguro / Bajo / Medio / Alto / Extremo
 tags:
   - dnd/lugar

@@ -1,6 +1,7 @@
 ---
 tipo: dashboard
 rol: dm
+planarally_sala: "" # ej: http://planarally.localhost/game/tu-usuario/nombre-sala
 campaña: "Oneshoot 01"
 tags:
   - dnd/dashboard
@@ -97,6 +98,13 @@ SORT file.name ASC
 TABLE lider AS "Líder", relacion_grupo AS "Relación"
 FROM "01 - Campañas"
 WHERE tipo = "faccion" AND startswith(file.folder, this.file.folder)
+```
+
+---
+
+## 🗺️ Mapas
+```dataviewjs
+await dv.view("90 - Plantillas/Scripts/mapas-campana")
 ```
 
 ---

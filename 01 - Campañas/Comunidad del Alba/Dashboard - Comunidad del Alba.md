@@ -11,6 +11,7 @@ tags:
 > 📜 [[01 - Campañas/Comunidad del Alba/01 - Sesiones/|01 - Sesiones]] • 🛡️ [[01 - Campañas/Comunidad del Alba/02 - Personajes/|02 - Personajes]] • 👥 [[01 - Campañas/Comunidad del Alba/03 - NPCs/|03 - NPCs]]
 > 🎯 [[01 - Campañas/Comunidad del Alba/04 - Misiones/|04 - Misiones]] • 🏰 [[01 - Campañas/Comunidad del Alba/05 - Lugares/|05 - Lugares]] • 🛡️ [[01 - Campañas/Comunidad del Alba/06 - Facciones/|06 - Facciones]]
 > 🎒 [[01 - Campañas/Comunidad del Alba/07 - Inventario/|07 - Inventario]] • 📦 [[01 - Campañas/Comunidad del Alba/07 - Inventario/Inventario de la Party|Inventario de la Party]] • 📖 [[01 - Campañas/Comunidad del Alba/08 - Lore/|08 - Lore]]
+> 🗺️ [[01 - Campañas/Comunidad del Alba/10 - Mapas/Mapa del Mundo|Mapa del Mundo]]
 
 ---
 

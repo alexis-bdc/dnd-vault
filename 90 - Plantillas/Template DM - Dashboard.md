@@ -1,6 +1,7 @@
 ---
 tipo: dashboard
 rol: dm
+planarally_sala: "" # ej: http://planarally.localhost/game/tu-usuario/nombre-sala
 campaña: "<% tp.file.folder(true).includes('01 - Campañas') ? tp.file.folder(true).split('/')[1] : '' %>"
 tags:
   - dnd/dashboard
@@ -97,6 +98,14 @@ SORT file.name ASC
 TABLE lider AS "Líder", relacion_grupo AS "Relación"
 FROM "01 - Campañas"
 WHERE tipo = "faccion" AND startswith(file.folder, this.file.folder)
+```
+
+---
+
+## 🗺️ Mapas
+- 🌍 [[<% tp.file.folder(true).split('/').slice(0, 2).join('/') %>/10 - Mapas/Mapa del Mundo|Mapa del Mundo]] (solo campañas largas: crea la nota con «Template DM - Mapa del Mundo»)
+```dataviewjs
+await dv.view("90 - Plantillas/Scripts/mapas-campana")
 ```
 
 ---

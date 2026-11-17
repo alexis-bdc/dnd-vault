@@ -42,7 +42,12 @@ if (tipo === "Combate") {
   const p = L.presupuesto(niveles);
   const ops = L.opciones(p[dif]);
   fm.dificultad_objetivo = dif;
-  cuerpo = `## ⚔️ Enemigos
+  cuerpo = `## 🗺️ Mapa
+\`\`\`dataviewjs
+await dv.view("90 - Plantillas/Scripts/mapa-encuentro")
+\`\`\`
+
+## ⚔️ Enemigos
 > Presupuesto ${dif}: **${p[dif]} XP** para ${niveles.length} PJ (nv ${niveles.join(", ")}). Elige una combinación y llena \`enemigos_cr\`.
 
 ${ops.map((o) => `- ${o.desc} (${o.xp} XP)`).join("\n")}
@@ -115,7 +120,7 @@ estado: Preparado # Preparado / Jugado / Descartado
 sesion: "${sesionLink}"
 jugado_en: ""
 ubicacion: ""
-${tipo === "Combate" ? "enemigos_cr: []\n" : ""}tags:
+${tipo === "Combate" ? "enemigos_cr: []\nmapa: \"\"\nescena_planarally: \"\"\n" : ""}tags:
   - dnd/encuentro
   - dnd/dm
 ---
