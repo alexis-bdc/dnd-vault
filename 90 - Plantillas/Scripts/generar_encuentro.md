@@ -102,13 +102,18 @@ await dv.view("90 - Plantillas/Scripts/dificultad")
 }
 
 const fecha = tp.date.now("YYYY-MM-DD HHmm");
+// Si se genera desde una nota de sesión, queda planeado para esa sesión
+const activa = app.workspace.getActiveFile();
+const sesionLink = activa && app.metadataCache.getFileCache(activa)?.frontmatter?.tipo === "sesion"
+  ? `[[${activa.path.replace(/\.md$/, "")}|${activa.basename}]]` : "";
 const yaml = Object.entries(fm).map(([k, v]) => `${k}: "${v}"`).join("\n");
 const contenido = `---
 tipo: encuentro
 campaña: "${raiz.split("/")[1]}"
 ${yaml}
 estado: Preparado # Preparado / Jugado / Descartado
-sesion: ""
+sesion: "${sesionLink}"
+jugado_en: ""
 ubicacion: ""
 ${tipo === "Combate" ? "enemigos_cr: []\n" : ""}tags:
   - dnd/encuentro

@@ -53,7 +53,7 @@ actions:
 
 ### Preparados (sin jugar)
 ```dataview
-TABLE tipo_encuentro AS "Tipo", sesion AS "Sesión", ubicacion AS "Dónde"
+TABLE tipo_encuentro AS "Tipo", sesion AS "Planeado para", ubicacion AS "Dónde"
 FROM "01 - Campañas"
 WHERE tipo = "encuentro" AND estado = "Preparado" AND startswith(file.folder, this.file.folder)
 SORT file.mtime DESC

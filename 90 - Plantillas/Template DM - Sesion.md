@@ -40,11 +40,18 @@ tags:
 - [[ ]]
 
 ### Encuentros
-> Crea los encuentros en `09 - Encuentros` y en su propiedad `sesion` pon el link a esta nota.
-```dataview
-TABLE tipo_encuentro AS "Tipo", estado AS "Estado", ubicacion AS "Dónde"
-FROM "01 - Campañas"
-WHERE tipo = "encuentro" AND contains(string(sesion), this.file.name)
+> Marca ✅ los que se jugaron. Los no jugados quedan pendientes para la próxima sesión.
+```dataviewjs
+await dv.view("90 - Plantillas/Scripts/encuentros-sesion")
+```
+
+```meta-bind-button
+label: ⚡ Encuentro rápido para esta sesión
+icon: zap
+style: default
+actions:
+  - type: runTemplaterFile
+    templateFile: 90 - Plantillas/Scripts/generar_encuentro.md
 ```
 
 ### Tesoro
