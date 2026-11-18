@@ -14,3 +14,4 @@ Thumbs.db
 .tools/mapa-mundo/mapa.exe
 .tools/mapa-mundo/_salida.*
 .tools/mapa-mundo/__pycache__/
+.tools/mundo/

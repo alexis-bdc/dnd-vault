@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Battlemaps pixel-art de la campaña Tierra de Bloques (solo librería estándar).
+"""Battlemap pixel-art de la arena del End de Tierra de Bloques (solo librería estándar).
 
 Uso (desde la raíz del vault):  python3 .tools/battlemaps/battlemaps.py
 Escribe los PNG en  01 - Campañas/Tierra de Bloques/10 - images/Battlemaps/
 1 casilla = 1 bloque = 1,5 m. Norte arriba.
 
-La arena del End sale de la semilla (pilares con end_pilares.py, suelo de end_suelo.txt generado con cubiomes).
-Las estructuras son reconstrucciones aproximadas de su distribución en el juego.
+La arena sale de la semilla (pilares con end_pilares.py, suelo de end_suelo.txt generado con cubiomes).
+Las estructuras se exportan del mundo real (ver nota Battlemaps), no se dibujan aquí.
 Si ImageMagick (`magick`) está instalado, añade etiquetas de texto a los pilares del End.
 """
 import random, shutil, struct, subprocess, sys, zlib
@@ -343,170 +343,6 @@ def arena_end():
     return completo, datos, R
 
 
-def cabana_bruja():
-    return render("Cabaña de bruja", [
-        "ww..www..ww.www",
-        "w.wwwwwwwww.ww.",
-        ".wwwLKKKKKLwwl.",
-        "wwwwKk+kkoKwww.",
-        ".lwwKkkkkkKwww.",
-        "wwwwKkkkkkKw.ww",
-        "wwwwKkkkkkKwwww",
-        "w.wwKkkkk%Kwwl.",
-        "wwwwLKKkKKLwww.",
-        "wwwwLkkkkkLwww.",
-        "wwwwkkkkkkkwww.",
-        "ww.wwwwwwwwww.w",
-        ".wwwlwwwww..www",
-        "..wwwwww.wwww..",
-        "...ww..www.....",
-    ], "w")
-
-
-def iglu():
-    a = render("Iglú - Superficie", [
-        "nnnnnnnnnnn",
-        "nnnNNNNNnnn",
-        "nnNNn=nNNnn",
-        "nnNnnnnnNnn",
-        "nnNfnnn+Nnn",
-        "nnNnn^nnNnn",
-        "nnNNnnnNNnn",
-        "nnnNNnNNnnn",
-        "nnnnNnNnnnn",
-        "nnnnNnNnnnn",
-        "nnnnnnnnnnn",
-    ], "n")
-    b = render("Iglú - Sótano", [
-        "RRRRRRRRR",
-        "RRRR^RRRR",
-        "RRRRcRRRR",
-        "RRRRcRRRR",
-        "RcccccccR",
-        "Rb#ccccoR",
-        "RcccccccR",
-        "RHHHRHHHR",
-        "RcacRczcR",
-        "RcccRcccR",
-        "RRRRRRRRR",
-    ], "c")
-    return a, b
-
-
-def templo_desierto():
-    g = Rejilla(25, 25, "s")
-    g.rect(2, 2, 22, 22, "S", borde="X")
-    for x0 in (2, 18):  # torres de la fachada (norte)
-        g.rect(x0, 2, x0 + 4, 6, "S", borde="X")
-        g.set(x0 + 2, 4, "^")
-        g.set(x0 + 2, 6, "S")
-    for x in (11, 12, 13):
-        g.set(x, 2, "S")  # entrada
-    for x, y in ((7, 9), (17, 9), (7, 15), (17, 15), (7, 20), (17, 20)):
-        g.set(x, y, "X")  # columnas
-    for dy, fila in enumerate(["..T..", ".TTT.", "TTATT", ".TTT.", "..T.."]):
-        for dx, ch in enumerate(fila):
-            if ch != ".":
-                g.set(10 + dx, 10 + dy, ch)
-    a = render("Templo del desierto - Planta", g.filas(), "S")
-    c = Rejilla(11, 11, "S")  # sala cuadrada; cofres metidos en huecos de las paredes; la placa encima de la TNT
-    c.rect(0, 0, 10, 10, "S", borde="X")
-    c.rect(1, 1, 9, 9, "S", borde="X")
-    for x, y in ((5, 1), (5, 9), (1, 5), (9, 5)):
-        c.set(x, y, "#")
-    for x, y in ((3, 3), (7, 3), (3, 7), (7, 7), (5, 3), (3, 5), (7, 5), (5, 7)):
-        c.set(x, y, "T")
-    c.set(5, 5, "_")
-    b = render("Templo del desierto - Cámara del tesoro", c.filas(), "S")
-    return a, b
-
-
-def puesto_saqueadores():
-    g = Rejilla(25, 25, ".")
-    for x, y in ((3, 3), (4, 3), (3, 4), (20, 18), (21, 19), (5, 20), (22, 4), (12, 22)):
-        g.set(x, y, ",")
-    g.rect(8, 8, 16, 16, "q", borde="D")
-    for x, y in ((8, 8), (16, 8), (8, 16), (16, 16)):
-        g.set(x, y, "L")
-    for x in (10, 14):
-        g.set(x, 8, "C"); g.set(x, 16, "C")
-    g.set(12, 16, "q")  # puerta (sur)
-    g.set(15, 9, "^")
-    g.set(9, 15, "+")
-    g.rect(2, 13, 6, 17, ",", borde="H")  # jaula con gólem
-    g.set(4, 15, "G")
-    g.rect(18, 3, 21, 5, "y")  # tiendas
-    g.rect(3, 6, 5, 7, "y")
-    g.rect(19, 11, 22, 12, "L")  # pila de troncos
-    a = render("Puesto de saqueadores - Planta baja", g.filas(), ".")
-    t = Rejilla(11, 11, ".")
-    t.rect(0, 0, 10, 10, "q", borde="D")
-    for x, y in ((0, 0), (10, 0), (0, 10), (10, 10)):
-        t.set(x, y, "L")
-    for i in range(2, 9, 2):
-        for x, y in ((i, 0), (i, 10), (0, i), (10, i)):
-            t.set(x, y, "q")  # almenas: huecos para disparar
-    t.set(8, 2, "^")
-    t.set(2, 2, "#")
-    t.set(5, 5, "!")
-    b = render("Puesto de saqueadores - Azotea", t.filas(), "q")
-    return a, b
-
-
-def templo_jungla():
-    rnd = random.Random(7)
-    g = Rejilla(18, 21, "h")
-    for y in range(21):
-        for x in range(18):
-            if rnd.random() < 0.35:
-                g.set(x, y, ".")
-    g.rect(2, 2, 15, 18, "j", borde="C")
-    for y in range(2, 19):
-        for x in range(2, 16):
-            if g.g[y][x] == "C" and rnd.random() < 0.45:
-                g.set(x, y, "M")
-    g.rect(5, 5, 12, 11, "j", borde="C")  # sala interior
-    for x in (8, 9):
-        g.set(x, 18, "j"); g.set(x, 11, "j")  # puertas
-    g.set(6, 6, "^"); g.set(11, 6, "!")
-    for x, y in ((4, 14), (13, 14), (4, 4), (13, 4)):
-        g.set(x, y, "M")
-    a = render("Templo de la jungla - Planta", g.filas(), "j")
-    s = Rejilla(14, 15, "C")
-    s.rect(1, 1, 12, 13, "j", borde="M")
-    s.rect(4, 4, 9, 13, "C")  # macizo central
-    s.set(2, 2, "^")
-    for y in (5, 9):
-        s.set(1, y, "d"); s.set(3, y, "x")  # pasillo oeste: cables y dispensadores
-    s.set(2, 7, "x")
-    for x in (5, 6, 7):
-        s.set(x, 3, "/")  # puzle de 3 palancas
-    s.set(11, 12, "#"); s.set(2, 12, "#")
-    s.set(10, 2, "d"); s.set(11, 5, "x")
-    a2 = render("Templo de la jungla - Sótano", s.filas(), "j")
-    return a, a2
-
-
-def sala_desafio():
-    g = Rejilla(19, 19, "u")
-    g.rect(0, 0, 18, 18, "u", borde="Y")
-    for x in range(1, 18):
-        for y in range(1, 18):
-            if (x % 4 == 1 and y % 4 == 1):
-                g.set(x, y, "U")
-    for x, y in ((9, 0), (9, 18), (0, 9), (18, 9)):
-        g.set(x, y, "u")  # puertas
-    for x, y in ((5, 5), (13, 5), (5, 13), (13, 13)):
-        g.rect(x - 1, y - 1, x, y, "Y")  # columnas
-    g.set(9, 9, "*")
-    for x, y in ((1, 1), (2, 1), (17, 1), (1, 17), (17, 16), (17, 17), (8, 1), (10, 17)):
-        g.set(x, y, "%")
-    g.set(16, 2, "$")
-    g.rect(7, 14, 11, 16, "U")  # plataforma elevada de cobre
-    g.set(3, 9, "d"); g.set(15, 9, "d")
-    return render("Cámaras de desafío - Sala", g.filas(), "u")
-
-
 def etiquetas_end(ruta, datos, R, k):
     """Texto sobre la imagen con ImageMagick si está disponible (opcional)."""
     if not shutil.which("magick"):
@@ -534,7 +370,6 @@ def main():
     SALIDA.mkdir(parents=True, exist_ok=True)
     completo, datos, R = arena_end()
     etiquetas_end(completo, datos, R, 3)
-    cabana_bruja(); iglu(); templo_desierto(); puesto_saqueadores(); templo_jungla(); sala_desafio()
     print("\nPilares del End (n, x, z, radio, altura y, enjaulado, suelo y):")
     for d in datos:
         print(d)

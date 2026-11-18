@@ -97,6 +97,6 @@ Están listos en `01 - Campañas/Tierra de Bloques/`:
 | `08 - Lore/Mobs/` | 26 statblocks (17 del PDF *Minecraft 5e* + 9 caseros de las cámaras de desafío) |
 | `07 - Inventario/` | Recetas de crafteo, comercio y equivalencias, botín por lugar |
 | `10 - images/Tokens/` | Tokens de los mobs para el VTT (cuerpo entero y `Caras/`) |
-| `Battlemaps` + `10 - images/Battlemaps/` | Mapas de combate: arena del End (de la semilla) y 6 estructuras |
+| `Battlemaps` + `10 - images/Battlemaps/` | Mapas de combate: arena del End (de la semilla); estructuras reales pendientes |
 | `90 - Plantillas/Scripts/` | `reloj-dia.js`, `encuentros-lib.js`, `dificultad.js`, `generar_encuentro.md` |
 | `99 - Adjuntos/Minecraft 5e.pdf` | Fuente original de los statblocks |
