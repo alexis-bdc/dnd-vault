@@ -14,4 +14,7 @@ Thumbs.db
 .tools/mapa-mundo/mapa.exe
 .tools/mapa-mundo/_salida.*
 .tools/mapa-mundo/__pycache__/
-.tools/mundo/
+# Mundo generado, servidor de Mojang y uNmINeD (se descargan; ver .tools/mundo/planos.py)
+.tools/mundo/*
+!.tools/mundo/planos.py
+!.tools/mundo/estructuras.json

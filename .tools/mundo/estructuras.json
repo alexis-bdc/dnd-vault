@@ -1,0 +1,23 @@
+[
+ ["Cámaras de desafío 1", "overworld", 16, 336, 80],
+ ["Cámaras de desafío 2", "overworld", 176, -464, 80],
+ ["Cabaña de bruja", "overworld", -240, 1184, 24],
+ ["Templo del desierto", "overworld", -144, -2912, 24],
+ ["Templo de la jungla 1", "overworld", 752, 144, 24],
+ ["Templo de la jungla 2", "overworld", -416, -976, 24],
+ ["Puesto de saqueadores 1", "overworld", -1184, 1024, 32],
+ ["Puesto de saqueadores 2", "overworld", 1184, -1488, 32],
+ ["Iglú 1", "overworld", -1472, 1072, 24],
+ ["Iglú 2", "overworld", -2000, 640, 24],
+ ["Aldea 1", "overworld", 400, -464, 100],
+ ["Aldea 2", "overworld", 160, -880, 100],
+ ["Mansión del bosque", "overworld", -832, -656, 100],
+ ["Ciudad antigua", "overworld", 3136, 432, 120],
+ ["Fortaleza del End", "overworld", -496, -1776, 112],
+ ["Monumento oceánico", "overworld", 48, 768, 48],
+ ["Fortaleza del Nether 1", "the_nether", 112, -96, 112],
+ ["Fortaleza del Nether 2", "the_nether", -128, -80, 112],
+ ["Bastión 1", "the_nether", 112, 272, 56],
+ ["Bastión 2", "the_nether", -256, 304, 56],
+ ["Ciudad del End", "the_end", 352, 976, 80]
+]
