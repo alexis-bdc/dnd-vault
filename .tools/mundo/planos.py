@@ -15,7 +15,8 @@ VAULT = AQUI.parent.parent
 MUNDO = AQUI / "mundo"
 UNMINED = next((AQUI / "unmined").glob("*/unmined-cli"))
 SALIDA = VAULT / "01 - Campañas" / "Tierra de Bloques" / "10 - images" / "Battlemaps"
-PX = 64  # píxeles por bloque en el PNG final (= casilla del VTT)
+PX = 32  # píxeles por bloque en el PNG final (= casilla del VTT)
+CLIENTE = AQUI / "client.jar"  # texturas del juego (Minecraft Java 1.21.1, descargado de Mojang)
 DIMS = {"overworld": ("", 0), "the_nether": ("DIM-1", -1), "the_end": ("DIM1", 1)}
 MAX_PLANTAS = 6
 ALTAS = {"minecraft:monument", "minecraft:ancient_city", "minecraft:desert_pyramid", "minecraft:jungle_pyramid"}  # pocas piezas altas: corte cada 6 bloques
@@ -95,30 +96,43 @@ def plantas(cajas):
     return [(g[0], g[-1]) for g in grupos]
 
 
-def cofres_y(dim, area):
-    """Alturas de los cofres reales del área (para plantas que el juego no guarda como pieza: cámaras de templos)."""
-    tmp = AQUI / "_cofres.csv"
-    subprocess.run([str(UNMINED), "blockfind", "dump", f"--world={MUNDO}", f"--dimension={DIMS[dim][1]}", "--block=minecraft:chest",
-                    f"--area=b(({area[0]},{area[1]}),({area[2]},{area[3]}))", f"--output={tmp}", "-c"], check=True, stdout=subprocess.DEVNULL)
-    ys = {int(l.split(";")[4]) for l in tmp.read_text().splitlines()[1:] if l.strip()}
-    tmp.unlink()
+def bloques_y(dim, area, *bloques):
+    """Alturas reales de ciertos bloques en el área (cofres, generadores…): marcan dónde hay salas."""
+    ys = set()
+    for bloque in bloques:
+        tmp = AQUI / "_bloques.csv"
+        subprocess.run([str(UNMINED), "blockfind", "dump", f"--world={MUNDO}", f"--dimension={DIMS[dim][1]}", f"--block=minecraft:{bloque}",
+                        f"--area=b(({area[0]},{area[1]}),({area[2]},{area[3]}))", f"--output={tmp}", "-c"], check=True, stdout=subprocess.DEVNULL)
+        ys |= {int(l.split(";")[4]) for l in tmp.read_text().splitlines()[1:] if l.strip()}
+        tmp.unlink()
     return sorted(ys)
+
+
+def tramos(ys, alto=5):
+    """Agrupa alturas en plantas de `alto` bloques: [(suelo_min, suelo_max)] (el bloque está 1 por encima del suelo)."""
+    out = []
+    for y in ys:
+        if out and y - 1 - out[-1][0] < alto:
+            out[-1] = (out[-1][0], y - 1)
+        else:
+            out.append((y - 1, y - 1))
+    return out
 
 
 def render(dim, area, salida, top=None, bottom=None):
     tmp = AQUI / "_render.png"
     cmd = [str(UNMINED), "image", "render", f"--world={MUNDO}", f"--output={tmp}", f"--dimension={DIMS[dim][1]}",
-           f"--area=b(({area[0]},{area[1]}),({area[2]},{area[3]}))", "--zoom=0", "--background=#141414", "-c"]
+           f"--area=b(({area[0]},{area[1]}),({area[2]},{area[3]}))", "--zoom=3", "--blockrender=true", f"--java-client-jar={CLIENTE}", "--background=#141414", "-c"]
     if top is not None:
         cmd += [f"--topY={top}", f"--bottomY={bottom}"]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)
-    # zoom 0 = 1 px por bloque: se escala sin suavizar y se le pone la cuadrícula de 1 bloque
+    # zoom 3 = 8 px por bloque con texturas: se escala sin suavizar y se le pone la cuadrícula de 1 bloque
     rejilla = AQUI / "_rejilla.png"
     if not rejilla.exists():
         subprocess.run(["magick", "-size", f"{PX}x{PX}", "xc:white", "-fill", "#00000060", "-draw", f"rectangle 0,0 {PX - 1},1",
                         "-draw", f"rectangle 0,0 1,{PX - 1}", str(rejilla)], check=True)
-    w, h = struct.unpack(">II", tmp.read_bytes()[16:24])  # tamaño desde la cabecera PNG
-    subprocess.run(["magick", str(tmp), "-filter", "point", "-resize", f"{PX * 100}%",
+    w, h = (v // 8 for v in struct.unpack(">II", tmp.read_bytes()[16:24]))  # bloques, desde la cabecera PNG
+    subprocess.run(["magick", str(tmp), "-filter", "point", "-resize", f"{PX * 100 // 8}%",
                     "(", "-size", f"{w * PX}x{h * PX}", f"tile:{rejilla}", ")",
                     "-compose", "multiply", "-composite", str(salida)], check=True)
     tmp.unlink()
@@ -146,7 +160,10 @@ def main():
             y0, y1 = min(b[1] for b in cajas), max(b[4] for b in cajas)
             niveles = [(y, y) for y in range(y0, y1 - 2, 6)][:MAX_PLANTAS]
             if "pyramid" in sid:  # la cámara/sótano queda fuera de la pieza: se añade a la altura de sus cofres
-                niveles = sorted(niveles + [(y - 1, y - 1) for y in cofres_y(dim, (x0, z0, x1, z1)) if y < y0])
+                niveles = sorted(niveles + [(y - 1, y - 1) for y in bloques_y(dim, (x0, z0, x1, z1), "chest") if y < y0])
+        elif sid == "minecraft:trial_chambers":  # salas a muchas alturas: una planta por tramo con generadores/bóvedas
+            # corte 3 bloques sobre el suelo más bajo del tramo: más arriba se vería el techo de las salas
+            niveles = [(ya, ya) for ya, _ in tramos(bloques_y(dim, (x0, z0, x1, z1), "trial_spawner", "vault"))]
         else:
             niveles = plantas(cajas)
         for n, (ya, yb) in enumerate(niveles, 1):
@@ -168,4 +185,5 @@ def main():
 if __name__ == "__main__":
     # autocomprobación del agrupado de plantas
     assert plantas([[0, 10, 0, 0, 0, 0], [0, 12, 0, 0, 0, 0], [0, 20, 0, 0, 0, 0]]) == [(10, 12), (20, 20)]
+    assert tramos([-25, -23, -19, -9, -2]) == [(-26, -24), (-20, -20), (-10, -10), (-3, -3)]
     main()

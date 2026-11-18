@@ -58,10 +58,10 @@ Ocupa 45×45 casillas alrededor del portal. Úsalo cuando el dragón se posa en 
 
 ## 🏛️ Estructuras reales del mundo
 
-Exportadas del **mundo real de la semilla** (servidor de Minecraft 1.21.1 + uNmINeD), planta por planta. **1 casilla = 1 bloque = 64 px.**
+Exportadas del **mundo real de la semilla** (servidor de Minecraft 1.21.1 + uNmINeD) con las **texturas del juego**, planta por planta. **1 casilla = 1 bloque = 32 px.**
 - **Exterior:** vista desde arriba (tejados y terreno).
-- **Planta N (Y …):** corte horizontal a esa altura: se ve el suelo, los muebles y los muros, sin techo. El negro es vacío o caída.
-- Los colores son la paleta de uNmINeD (sin texturas del juego).
+- **Planta N (Y …):** corte horizontal 3 bloques por encima de ese suelo: se ve el suelo, los muebles y los muros, sin techo. El negro es vacío o caída.
+- **Cámaras de desafío:** una planta por cada tramo de altura con generadores o bóvedas.
 - Regenerar: `python3 .tools/mundo/planos.py` (ver `.tools/mundo/`).
 
 ### 🏛️ Superficie y subsuelo
@@ -69,16 +69,25 @@ Exportadas del **mundo real de la semilla** (servidor de Minecraft 1.21.1 + uNmI
 #### Cámaras de desafío 1
 X 16 · Z 336
 
-![[Cámaras de desafío 1 - Planta 1 (Y -29).png|400]]
-![[Cámaras de desafío 1 - Planta 2 (Y -4).png|400]]
-![[Cámaras de desafío 1 - Planta 3 (Y 8).png|400]]
+![[Cámaras de desafío 1 - Planta 1 (Y -26).png|400]]
+![[Cámaras de desafío 1 - Planta 2 (Y -21).png|400]]
+![[Cámaras de desafío 1 - Planta 3 (Y -16).png|400]]
+![[Cámaras de desafío 1 - Planta 4 (Y -10).png|400]]
+![[Cámaras de desafío 1 - Planta 5 (Y -3).png|400]]
+![[Cámaras de desafío 1 - Planta 6 (Y 2).png|400]]
+![[Cámaras de desafío 1 - Planta 7 (Y 9).png|400]]
+![[Cámaras de desafío 1 - Planta 8 (Y 14).png|400]]
 
 #### Cámaras de desafío 2
 X 176 · Z -464
 
-![[Cámaras de desafío 2 - Planta 1 (Y -50).png|400]]
-![[Cámaras de desafío 2 - Planta 2 (Y -40).png|400]]
-![[Cámaras de desafío 2 - Planta 3 (Y -14).png|400]]
+![[Cámaras de desafío 2 - Planta 1 (Y -38).png|400]]
+![[Cámaras de desafío 2 - Planta 2 (Y -33).png|400]]
+![[Cámaras de desafío 2 - Planta 3 (Y -27).png|400]]
+![[Cámaras de desafío 2 - Planta 4 (Y -20).png|400]]
+![[Cámaras de desafío 2 - Planta 5 (Y -14).png|400]]
+![[Cámaras de desafío 2 - Planta 6 (Y -9).png|400]]
+![[Cámaras de desafío 2 - Planta 7 (Y -4).png|400]]
 
 #### Cabaña de bruja
 X -240 · Z 1184
