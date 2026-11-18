@@ -173,7 +173,7 @@ Qué se llevan los PJ al despejar cada lugar del [[Mapa del Mundo]]. Precios en 
 ---
 
 ## ♜ Fortaleza del End ☠️
-**Guardianes:** [[Esqueleto|esqueletos]], [[Zombi|zombis]], [[Araña|arañas]] y **lepismas** que salen de los bloques infestados (es un enjambre: 1 de cada 6 bloques picados). Hay un **generador** de lepismas en la sala del portal.
+**Guardianes:** [[Esqueleto|esqueletos]], [[Zombi|zombis]], [[Araña|arañas]] y [[Enjambre de Lepismas|lepismas]] que salen de los bloques infestados (1 de cada 6 bloques picados). Hay un **generador** de lepismas en la sala del portal.
 **Al despejarla:** acceso al **portal del End**. Con 12 ojos de ender colocados se abre el camino al [[Dragón del End]].
 **Cofres:** 1d4+2 entre la biblioteca, el almacén y los altares.
 
@@ -253,7 +253,7 @@ Qué se llevan los PJ al despejar cada lugar del [[Mapa del Mundo]]. Precios en 
 ---
 
 ## ⚔️ Cámaras de desafío
-**Guardianes:** **generadores de desafío** que sacan oleadas de [[Zombi|zombis]], [[Esqueleto|esqueletos]], [[Araña|arañas]], slimes y **breezes** (mobs de viento que empujan y saltan; usa CR 2, ataque de viento 2d6 y empujón de 3 m). Cuantos más PJ, más mobs por oleada (1 + 1 por PJ). Superar una sala la limpia.
+**Guardianes:** **generadores de desafío** que sacan oleadas de [[Zombi|zombis]], [[Zombi Momificado|momificados]], esqueletos ([[Esqueleto Glacial|glaciales]], [[Esqueleto Empantanado|empantanados]]), [[Araña de Cueva|arañas de cueva]], [[Slime Grande|slimes]], [[Enjambre de Lepismas|lepismas]] y [[Brisa|brisas]]. Reglas, oleadas por número de PJ y eventos de sala en [[Bestiario#⚔️ Cámaras de desafío]].
 **Al despejarlo:** cada generador derrotado suelta **1 llave de desafío**, que abre 1 **bóveda** (una tirada en la tabla). Si la sala era **ominosa** (un PJ llevaba el efecto de incursión), suelta **llave ominosa** y la tirada es en la columna ominosa.
 
 | d12 | Bóveda normal | Bóveda ominosa |

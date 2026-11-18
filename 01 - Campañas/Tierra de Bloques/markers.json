@@ -56,6 +56,13 @@
     "alpha": 1
   },
   {
+    "type": "camaras",
+    "iconName": "key",
+    "color": "#e08030",
+    "layer": false,
+    "alpha": 1
+  },
+  {
     "type": "spawn",
     "iconName": "star",
     "color": "#ffffff",

@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
 """Genera el mapa del mundo de una semilla de Minecraft Java para una campaña del vault.
 
-Uso (desde la raíz del vault):
+Uso (desde la raíz del vault; en Windows, `py` en vez de `python3`):
   python3 .tools/mapa-mundo/generar_mapa.py <semilla> <version> [--lado 8000] [--bpp 2] [--cuadricula 500] [--nether]
       [--campaña "Tierra de Bloques"]
+
+Necesita Python 3, git y gcc (en Windows: w64devkit o MSYS2 MinGW). Ver "00 - Instalar en Windows.md".
 
 Crea:
   01 - Campañas/<campaña>/10 - images/Mapa del Mundo.png   (o "Mapa del Nether.png")
   01 - Campañas/<campaña>/Mapa del Mundo.md                (nota con el mapa Leaflet y marcadores)
 """
-import argparse, csv, json, os, subprocess, sys
+import argparse, csv, json, os, struct, subprocess, sys, zlib
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 VAULT = AQUI.parent.parent
 CUBIOMES = AQUI.parent / "cubiomes"
-BIN = AQUI / "mapa"
+BIN = AQUI / ("mapa.exe" if os.name == "nt" else "mapa")
+CUBIOMES_COMMIT = "e61f905"  # versión probada (soporta hasta Java 1.21.4)
+FUENTES = ["noise", "biomes", "layers", "biomenoise", "generator", "finders", "util", "quadbase"]
 
 # Estructuras con marcador clicable en Leaflet: tipo -> (tipo de marcador, icono Font Awesome, color).
-# Cámaras de desafío, ruinas e iglús salen cientos: solo van dibujados en la imagen.
+# Ruinas, iglús y portales en ruinas salen cientos: solo van dibujados en la imagen.
 TIPOS = {
     "Aldea": ("aldea", "home", "#ffd700"),
     "Puesto de saqueadores": ("saqueadores", "flag", "#9a9a9a"),
@@ -29,6 +33,7 @@ TIPOS = {
     "Cabaña de bruja": ("bruja", "hat-wizard", "#50c040"),
     "Ciudad antigua": ("ciudad", "skull", "#5080b0"),
     "Fortaleza del End": ("fortaleza_end", "chess-rook", "#e600e6"),
+    "Cámaras de desafío": ("camaras", "key", "#e08030"),
     "Punto de aparición": ("spawn", "star", "#ffffff"),
     "Fortaleza del Nether": ("fortaleza_nether", "chess-rook", "#c03030"),
     "Bastión": ("bastion", "skull", "#303030"),
@@ -95,13 +100,26 @@ def run(cmd, **kw):
 
 
 def compilar():
-    if not (CUBIOMES / "libcubiomes.a").exists():
-        if not CUBIOMES.exists():
-            run(["git", "clone", "--depth", "1", "https://github.com/Cubitect/cubiomes.git", str(CUBIOMES)])
-        run(["make", "-C", str(CUBIOMES), "libcubiomes"])
+    if not CUBIOMES.exists():
+        run(["git", "clone", "https://github.com/Cubitect/cubiomes.git", str(CUBIOMES)])
+        run(["git", "-C", str(CUBIOMES), "checkout", "-q", CUBIOMES_COMMIT])
     src = AQUI / "mapa.c"
     if not BIN.exists() or BIN.stat().st_mtime < src.stat().st_mtime:
-        run(["gcc", "-O2", str(src), f"-I{CUBIOMES}", str(CUBIOMES / "libcubiomes.a"), "-lm", "-o", str(BIN)])
+        # Se compilan las fuentes de cubiomes directamente: no hace falta `make` (no viene en Windows)
+        run(["gcc", "-O2", str(src), *[str(CUBIOMES / f"{f}.c") for f in FUENTES], f"-I{CUBIOMES}", "-lm", "-o", str(BIN)])
+
+
+def ppm_a_png(ppm, png):
+    """PPM (P6) -> PNG solo con la librería estándar, para no depender de ImageMagick."""
+    datos = Path(ppm).read_bytes()
+    partes = datos.split(maxsplit=4)  # P6, ancho, alto, 255, píxeles
+    assert partes[0] == b"P6" and partes[3] == b"255", "PPM inesperado"
+    w, h, px = int(partes[1]), int(partes[2]), partes[4]
+    fila = 3 * w
+    crudo = b"".join(b"\0" + px[y * fila:(y + 1) * fila] for y in range(h))
+    trozo = lambda tipo, d: struct.pack(">I", len(d)) + tipo + d + struct.pack(">I", zlib.crc32(tipo + d) & 0xFFFFFFFF)
+    Path(png).write_bytes(b"\x89PNG\r\n\x1a\n" + trozo(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0))
+                          + trozo(b"IDAT", zlib.compress(crudo, 6)) + trozo(b"IEND", b""))
 
 
 def camino(agua, coste, a, b):
@@ -186,22 +204,19 @@ def main():
     salida = carpeta_img / nombre
 
     compilar()
-    tmp = os.environ.get("TMPDIR")  # ImageMagick necesita una carpeta temporal escribible
-    env = dict(os.environ, MAGICK_TEMPORARY_PATH=tmp) if tmp else None
     cuad = a.cuadricula if not a.nether else max(1, a.cuadricula // 8)  # en el Nether 1 bloque = 8 del mundo
-    run([str(BIN), a.semilla, a.version, str(a.lado), str(a.bpp), "nether" if a.nether else "overworld", str(cuad), str(salida)])
-    run(["magick", f"{salida}.ppm", f"{salida}.png"], env=env)
-    os.remove(f"{salida}.ppm")
-
-    with open(f"{salida}.csv", newline="") as f:
+    # El binario escribe en su carpeta con un nombre ASCII: en Windows, fopen() falla con rutas con tildes o ñ
+    tmp = AQUI / "_salida"
+    run([str(BIN), a.semilla, a.version, str(a.lado), str(a.bpp), "nether" if a.nether else "overworld", str(cuad), tmp.name], cwd=AQUI)
+    ppm_a_png(f"{tmp}.ppm", f"{salida}.png")
+    with open(f"{tmp}.csv", newline="", encoding="utf-8") as f:
         filas = [dict(r, x=int(r["x"]), z=int(r["z"])) for r in csv.DictReader(f)]
-    os.remove(f"{salida}.csv")
-    with open(f"{salida}.agua") as f:
+    with open(f"{tmp}.agua", encoding="utf-8") as f:
         agua = f.read().split()
-    os.remove(f"{salida}.agua")
-    with open(f"{salida}.biomas") as f:
+    with open(f"{tmp}.biomas", encoding="utf-8") as f:
         presentes = [l.strip().split(",") for l in f if l.strip()]
-    os.remove(f"{salida}.biomas")
+    for ext in ("ppm", "csv", "agua", "biomas"):
+        os.remove(f"{tmp}.{ext}")
     total = sum(int(b[5]) for b in presentes)
     leyenda_biomas = "\n".join(
         f'| <span style="display:inline-block;width:1.6em;height:1em;background:rgb({r},{g},{b});border:1px solid #000"></span> '
@@ -302,7 +317,7 @@ draw: true
 {chr(10).join(f"| {k} | {v} |" for k, v in sorted(resumen.items()))}
 
 {"## 🛤️ Caminos y rutas marítimas" + chr(10) + "Red mínima que une todas las aldeas. Los caminos rodean el mar y cruzan los ríos con puente; si por tierra hay que dar un rodeo de más del doble, se va en barco entre puertos (⚓)." + chr(10) + chr(10) + "| Ruta | Tipo | Bloques | Tiempo |" + chr(10) + "|---|---|---|---|" + chr(10) + chr(10).join(filas_rutas) + chr(10) + chr(10) if filas_rutas else ""}## 🧭 Iconos de Leaflet
-🏠 Aldea · ⚓ Aldea con puerto · 🚩 Puesto de saqueadores · 🏚️ Mansión · 🌊 Monumento oceánico · 🗿 Templo · 🧙 Cabaña de bruja · 💀 Ciudad antigua · ♜ Fortaleza del End · ⭐ Punto de aparición
+🏠 Aldea · ⚓ Aldea con puerto · 🚩 Puesto de saqueadores · 🏚️ Mansión · 🌊 Monumento oceánico · 🗿 Templo · 🧙 Cabaña de bruja · 💀 Ciudad antigua · ♜ Fortaleza del End · 🔑 Cámaras de desafío · ⭐ Punto de aparición
 
 ## 🌍 Biomas (colores del mapa)
 Ordenados de más a menos extensión. El mapa se toma a nivel del mar: donde hay colinas o montañas sale el bioma de la cueva que hay debajo (manchas marrones y verde oscuro).

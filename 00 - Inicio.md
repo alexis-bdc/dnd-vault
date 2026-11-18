@@ -8,6 +8,8 @@ tags:
 
 Bienvenido a tu base central para la gestión y seguimiento de campañas de D&D.
 
+🪟 ¿Abriendo la bóveda en otro PC? → [[00 - Instalar en Windows]]
+
 ---
 
 ## 🧭 Campañas
