@@ -12,7 +12,7 @@ hambre_hasta: 7
 
 # 🎲 Tierra de Bloques (DM)
 
-📘 [[Reglas de Supervivencia]] · 🧰 [[Recetas de Crafteo]] · 💚 [[Comercio y Equivalencias]]
+📘 [[Reglas de Supervivencia]] · 🧰 [[Recetas de Crafteo]] · 💚 [[Comercio y Equivalencias]] · 🗺️ [[Mapa del Mundo]] · ⚔️ [[Battlemaps]]
 
 ## 🌗 Reloj del día
 ```dataviewjs
