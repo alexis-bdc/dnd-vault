@@ -78,6 +78,18 @@ int main(int argc, char **argv) {
         fputc('\n', agua);
     }
     fclose(agua);
+    // Biomas presentes con su color (para la leyenda): id,nombre,r,g,b,celdas
+    {
+        long cuenta[256] = {0};
+        for (size_t k = 0; k < (size_t)n * n; k++) if (ids[k] >= 0 && ids[k] < 256) cuenta[ids[k]]++;
+        char ruta_b[4096];
+        snprintf(ruta_b, sizeof ruta_b, "%s.biomas", argv[7]);
+        FILE *fb = fopen(ruta_b, "w");
+        if (!fb) { perror(ruta_b); return 1; }
+        for (int b = 0; b < 256; b++)
+            if (cuenta[b]) fprintf(fb, "%d,%s,%d,%d,%d,%ld\n", b, biome2str(mc, b), colores[b][0], colores[b][1], colores[b][2], cuenta[b]);
+        fclose(fb);
+    }
     free(ids);
 
     // Cuadrícula de viaje (oscurece) y ejes 0,0 (rojo)

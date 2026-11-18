@@ -33,6 +33,47 @@ TIPOS = {
     "Fortaleza del Nether": ("fortaleza_nether", "chess-rook", "#c03030"),
     "Bastión": ("bastion", "skull", "#303030"),
 }
+# Nombre en español y qué ofrece cada bioma en la partida (para la leyenda de colores)
+BIOMAS = {
+    "ocean": ("Océano", "Peces, algas; ahogados de noche"), "deep_ocean": ("Océano profundo", "Monumentos, naufragios; ahogados"),
+    "frozen_ocean": ("Océano helado", "Icebergs, osos polares"), "deep_frozen_ocean": ("Océano helado profundo", "Monumentos; agua gélida"),
+    "cold_ocean": ("Océano frío", "Salmón, ruinas oceánicas"), "deep_cold_ocean": ("Océano frío profundo", "Monumentos, ruinas"),
+    "lukewarm_ocean": ("Océano templado", "Delfines, peces tropicales"), "deep_lukewarm_ocean": ("Océano templado profundo", "Monumentos, naufragios"),
+    "warm_ocean": ("Océano cálido", "Arrecifes de coral, tortugas"),
+    "river": ("Río", "Agua, arcilla, caña de azúcar; se cruza nadando o con puente"), "frozen_river": ("Río helado", "Hielo transitable"),
+    "beach": ("Playa", "Arena, tortugas; buen sitio de puerto"), "stony_shore": ("Costa pedregosa", "Piedra a la vista"),
+    "snowy_beach": ("Playa nevada", "Arena y nieve"),
+    "plains": ("Llanura", "Aldeas, caballos; viaje fácil"), "sunflower_plains": ("Llanura de girasoles", "Como la llanura; los girasoles marcan el este"),
+    "snowy_plains": ("Llanura nevada", "Aldeas de nieve, iglús; frío"), "ice_spikes": ("Picos de hielo", "Hielo compacto; terreno difícil"),
+    "desert": ("Desierto", "Templos, aldeas, cactus; sin agua ni madera"),
+    "swamp": ("Pantano", "Cabañas de bruja, slimes; terreno difícil"), "mangrove_swamp": ("Manglar", "Barro, ranas; terreno difícil"),
+    "forest": ("Bosque", "Madera, lobos"), "flower_forest": ("Bosque de flores", "Tintes, abejas, miel"),
+    "birch_forest": ("Bosque de abedules", "Madera clara"), "old_growth_birch_forest": ("Bosque de abedules antiguo", "Abedules altos"),
+    "dark_forest": ("Bosque oscuro", "Mansiones; mobs de día por la sombra"),
+    "old_growth_pine_taiga": ("Taiga de pinos antigua", "Podzol, setas"), "old_growth_spruce_taiga": ("Taiga de abetos antigua", "Abetos gigantes"),
+    "taiga": ("Taiga", "Aldeas, lobos, zorros, bayas"), "snowy_taiga": ("Taiga nevada", "Zorros, iglús; frío"),
+    "savanna": ("Sabana", "Aldeas, caballos, llamas"), "savanna_plateau": ("Meseta de sabana", "Sabana en alto"),
+    "windswept_hills": ("Colinas ventosas", "Esmeraldas en mineral, cabras; escalada"),
+    "windswept_gravelly_hills": ("Colinas ventosas de grava", "Grava, desprendimientos"),
+    "windswept_forest": ("Bosque ventoso", "Colinas con árboles"), "windswept_savanna": ("Sabana ventosa", "Terreno muy accidentado"),
+    "jungle": ("Jungla", "Templos, ocelotes, cacao; terreno difícil"), "sparse_jungle": ("Jungla dispersa", "Jungla más transitable"),
+    "bamboo_jungle": ("Jungla de bambú", "Pandas, bambú"),
+    "badlands": ("Tierras baldías", "Terracota, oro en superficie, minas"), "eroded_badlands": ("Tierras baldías erosionadas", "Agujas de terracota"),
+    "wooded_badlands": ("Tierras baldías boscosas", "Meseta con robles"),
+    "meadow": ("Pradera alpina", "Flores, abejas, aldeas en altura"), "cherry_grove": ("Cerezal", "Madera de cerezo, cerdos"),
+    "grove": ("Arboleda nevada", "Lobos; nieve polvo (cuidado)"), "snowy_slopes": ("Laderas nevadas", "Cabras, nieve polvo; escalada"),
+    "frozen_peaks": ("Picos helados", "Hielo; montaña muy alta"), "jagged_peaks": ("Picos escarpados", "Montaña muy alta e infranqueable a pie"),
+    "stony_peaks": ("Picos rocosos", "Calcita, piedra; montaña alta"),
+    "mushroom_fields": ("Campos de champiñones", "Champiñacas; sin mobs hostiles de noche"),
+    "deep_dark": ("Oscuridad profunda", "Ciudades antiguas, Warden (subterráneo)"),
+    "dripstone_caves": ("Cuevas de espeleotemas", "Colinas o montaña con cuevas debajo: estalactitas, cobre"),
+    "lush_caves": ("Cuevas frondosas", "Colinas con cuevas frondosas debajo: bayas brillantes, axolotes"),
+    "pale_garden": ("Jardín pálido", "Creaking de noche"),
+    "nether_wastes": ("Páramo del Nether", "Cuarzo, ghasts, piglins zombificados"), "soul_sand_valley": ("Valle de arena de almas", "Esqueletos, ghasts; terreno lento"),
+    "crimson_forest": ("Bosque carmesí", "Piglins, hoglins"), "warped_forest": ("Bosque distorsionado", "Endermen; zona tranquila"),
+    "basalt_deltas": ("Deltas de basalto", "Cubos de magma; terreno difícil"),
+}
+
 PUERTO = ("puerto", "anchor", "#3fa9f5")  # aldea con ruta marítima
 
 # Caminos: celdas de 64 bloques. Coste por celda según la máscara (0 tierra, 1 río, 2 océano); None = intransitable.
@@ -158,6 +199,14 @@ def main():
     with open(f"{salida}.agua") as f:
         agua = f.read().split()
     os.remove(f"{salida}.agua")
+    with open(f"{salida}.biomas") as f:
+        presentes = [l.strip().split(",") for l in f if l.strip()]
+    os.remove(f"{salida}.biomas")
+    total = sum(int(b[5]) for b in presentes)
+    leyenda_biomas = "\n".join(
+        f'| <span style="display:inline-block;width:1.6em;height:1em;background:rgb({r},{g},{b});border:1px solid #000"></span> '
+        f'| {BIOMAS.get(nom, (nom, ""))[0]} | {int(c) * 100 / total:.1f} % | {BIOMAS.get(nom, ("", ""))[1]} |'
+        for _, nom, r, g, b, c in sorted(presentes, key=lambda b: -int(b[5])))
 
     # Aldeas numeradas por cercanía al punto de aparición, y red de caminos / rutas marítimas entre ellas
     spawn = next((r for r in filas if r["tipo"] == "Punto de aparición"), {"x": 0, "z": 0})
@@ -220,6 +269,7 @@ tags:
 
 Semilla **{a.semilla}** · Java {a.version} · {a.lado}×{a.lado} bloques centrados en 0,0 · generado con cubiomes.
 {escala_nota}
+Qué se puede encontrar en cada lugar: [[Botín por Lugar]].
 
 > [!tip] Cómo usarlo (plugin **Leaflet**)
 > - **Medir:** Shift + clic en un punto y Shift + clic en otro. La distancia sale en bloques (abajo a la izquierda).
@@ -254,7 +304,14 @@ draw: true
 {"## 🛤️ Caminos y rutas marítimas" + chr(10) + "Red mínima que une todas las aldeas. Los caminos rodean el mar y cruzan los ríos con puente; si por tierra hay que dar un rodeo de más del doble, se va en barco entre puertos (⚓)." + chr(10) + chr(10) + "| Ruta | Tipo | Bloques | Tiempo |" + chr(10) + "|---|---|---|---|" + chr(10) + chr(10).join(filas_rutas) + chr(10) + chr(10) if filas_rutas else ""}## 🧭 Iconos de Leaflet
 🏠 Aldea · ⚓ Aldea con puerto · 🚩 Puesto de saqueadores · 🏚️ Mansión · 🌊 Monumento oceánico · 🗿 Templo · 🧙 Cabaña de bruja · 💀 Ciudad antigua · ♜ Fortaleza del End · ⭐ Punto de aparición
 
-## 🎨 Leyenda de la imagen
+## 🌍 Biomas (colores del mapa)
+Ordenados de más a menos extensión. El mapa se toma a nivel del mar: donde hay colinas o montañas sale el bioma de la cueva que hay debajo (manchas marrones y verde oscuro).
+
+| Color | Bioma | Del mapa | En la partida |
+|---|---|---|---|
+{leyenda_biomas}
+
+## 🎨 Estructuras dibujadas en la imagen
 {chr(10).join(f"- {c}: {t}" for c, t in LEYENDA)}
 - Líneas oscuras: cuadrícula cada {cuad} bloques.
 

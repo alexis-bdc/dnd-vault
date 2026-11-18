@@ -12,6 +12,7 @@ tags:
 
 Semilla **-4697940382757111526** · Java 1.21 · 8000×8000 bloques centrados en 0,0 · generado con cubiomes.
 Cada cuadro de la cuadrícula = 500 bloques = 1 hora a pie (½ a caballo).
+Qué se puede encontrar en cada lugar: [[Botín por Lugar]].
 
 > [!tip] Cómo usarlo (plugin **Leaflet**)
 > - **Medir:** Shift + clic en un punto y Shift + clic en otro. La distancia sale en bloques (abajo a la izquierda).
@@ -171,22 +172,22 @@ marker:
 ```
 
 ## 📍 Estructuras en el mapa
-| Estructura            | Cantidad |
-| --------------------- | -------- |
-| Aldea                 | 69       |
-| Cabaña de bruja       | 2        |
-| Ciudad antigua        | 5        |
-| Cámaras de desafío    | 200      |
-| Fortaleza del End     | 4        |
-| Iglú                  | 32       |
-| Mansión del bosque    | 1        |
-| Monumento oceánico    | 30       |
-| Portal en ruinas      | 155      |
-| Puesto de saqueadores | 13       |
-| Punto de aparición    | 1        |
-| Ruinas de sendero     | 38       |
-| Templo de la jungla   | 2        |
-| Templo del desierto   | 4        |
+| Estructura | Cantidad |
+|---|---|
+| Aldea | 69 |
+| Cabaña de bruja | 2 |
+| Ciudad antigua | 5 |
+| Cámaras de desafío | 200 |
+| Fortaleza del End | 4 |
+| Iglú | 32 |
+| Mansión del bosque | 1 |
+| Monumento oceánico | 30 |
+| Portal en ruinas | 155 |
+| Puesto de saqueadores | 13 |
+| Punto de aparición | 1 |
+| Ruinas de sendero | 38 |
+| Templo de la jungla | 2 |
+| Templo del desierto | 4 |
 
 ## 🛤️ Caminos y rutas marítimas
 Red mínima que une todas las aldeas. Los caminos rodean el mar y cruzan los ríos con puente; si por tierra hay que dar un rodeo de más del doble, se va en barco entre puertos (⚓).
@@ -265,7 +266,65 @@ Red mínima que une todas las aldeas. Los caminos rodean el mar y cruzan los rí
 ## 🧭 Iconos de Leaflet
 🏠 Aldea · ⚓ Aldea con puerto · 🚩 Puesto de saqueadores · 🏚️ Mansión · 🌊 Monumento oceánico · 🗿 Templo · 🧙 Cabaña de bruja · 💀 Ciudad antigua · ♜ Fortaleza del End · ⭐ Punto de aparición
 
-## 🎨 Leyenda de la imagen
+## 🌍 Biomas (colores del mapa)
+Ordenados de más a menos extensión. El mapa se toma a nivel del mar: donde hay colinas o montañas sale el bioma de la cueva que hay debajo (manchas marrones y verde oscuro).
+
+| Color | Bioma | Del mapa | En la partida |
+|---|---|---|---|
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(5,102,33);border:1px solid #000"></span> | Bosque | 9.5 % | Madera, lobos |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(141,179,96);border:1px solid #000"></span> | Llanura | 8.9 % | Aldeas, caballos; viaje fácil |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(32,32,112);border:1px solid #000"></span> | Océano frío | 6.7 % | Salmón, ruinas oceánicas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(49,85,74);border:1px solid #000"></span> | Taiga nevada | 6.2 % | Zorros, iglús; frío |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(255,255,255);border:1px solid #000"></span> | Llanura nevada | 6.1 % | Aldeas de nieve, iglús; frío |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(0,0,255);border:1px solid #000"></span> | Río | 5.4 % | Agua, arcilla, caña de azúcar; se cruza nadando o con puente |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(11,106,95);border:1px solid #000"></span> | Taiga | 5.0 % | Aldeas, lobos, zorros, bayas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(0,0,112);border:1px solid #000"></span> | Océano | 4.9 % | Peces, algas; ahogados de noche |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(0,0,172);border:1px solid #000"></span> | Océano cálido | 3.4 % | Arrecifes de coral, tortugas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(0,0,48);border:1px solid #000"></span> | Océano profundo | 3.3 % | Monumentos, naufragios; ahogados |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(32,32,56);border:1px solid #000"></span> | Océano frío profundo | 3.3 % | Monumentos, ruinas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(189,178,95);border:1px solid #000"></span> | Sabana | 3.1 % | Aldeas, caballos, llamas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(0,0,144);border:1px solid #000"></span> | Océano templado | 2.8 % | Delfines, peces tropicales |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(78,48,18);border:1px solid #000"></span> | Cuevas de espeleotemas | 2.5 % | Colinas o montaña con cuevas debajo: estalactitas, cobre |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(112,112,214);border:1px solid #000"></span> | Océano helado | 2.5 % | Icebergs, osos polares |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(7,249,178);border:1px solid #000"></span> | Pantano | 2.2 % | Cabañas de bruja, slimes; terreno difícil |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(0,0,64);border:1px solid #000"></span> | Océano templado profundo | 2.2 % | Monumentos, naufragios |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(160,160,255);border:1px solid #000"></span> | Río helado | 2.0 % | Hielo transitable |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(250,222,85);border:1px solid #000"></span> | Playa | 2.0 % | Arena, tortugas; buen sitio de puerto |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(64,81,26);border:1px solid #000"></span> | Bosque oscuro | 1.9 % | Mansiones; mobs de día por la sombra |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(250,148,24);border:1px solid #000"></span> | Desierto | 1.8 % | Templos, aldeas, cactus; sin agua ni madera |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(48,116,68);border:1px solid #000"></span> | Bosque de abedules | 1.5 % | Madera clara |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(89,102,81);border:1px solid #000"></span> | Taiga de pinos antigua | 1.2 % | Podzol, setas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(40,60,0);border:1px solid #000"></span> | Cuevas frondosas | 1.2 % | Colinas con cuevas frondosas debajo: bayas brillantes, axolotes |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(88,156,108);border:1px solid #000"></span> | Bosque de abedules antiguo | 1.1 % | Abedules altos |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(96,147,15);border:1px solid #000"></span> | Jungla dispersa | 0.9 % | Jungla más transitable |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(80,123,10);border:1px solid #000"></span> | Jungla | 0.8 % | Templos, ocelotes, cacao; terreno difícil |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(96,164,69);border:1px solid #000"></span> | Pradera alpina | 0.8 % | Flores, abejas, aldeas en altura |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(162,162,132);border:1px solid #000"></span> | Costa pedregosa | 0.7 % | Piedra a la vista |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(180,220,220);border:1px solid #000"></span> | Picos de hielo | 0.7 % | Hielo compacto; terreno difícil |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(217,69,21);border:1px solid #000"></span> | Tierras baldías | 0.7 % | Terracota, oro en superficie, minas |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(64,64,144);border:1px solid #000"></span> | Océano helado profundo | 0.5 % | Monumentos; agua gélida |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(255,109,61);border:1px solid #000"></span> | Tierras baldías erosionadas | 0.5 % | Agujas de terracota |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(129,142,121);border:1px solid #000"></span> | Taiga de abetos antigua | 0.5 % | Abetos gigantes |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(250,240,192);border:1px solid #000"></span> | Playa nevada | 0.4 % | Arena y nieve |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(96,96,96);border:1px solid #000"></span> | Colinas ventosas | 0.3 % | Esmeraldas en mineral, cabras; escalada |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(167,157,100);border:1px solid #000"></span> | Meseta de sabana | 0.3 % | Sabana en alto |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(132,149,0);border:1px solid #000"></span> | Jungla de bambú | 0.3 % | Pandas, bambú |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(196,196,196);border:1px solid #000"></span> | Laderas nevadas | 0.3 % | Cabras, nieve polvo; escalada |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(136,136,136);border:1px solid #000"></span> | Colinas ventosas de grava | 0.2 % | Grava, desprendimientos |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(91,115,82);border:1px solid #000"></span> | Bosque ventoso | 0.2 % | Colinas con árboles |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(45,142,73);border:1px solid #000"></span> | Bosque de flores | 0.2 % | Tintes, abejas, miel |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(71,114,108);border:1px solid #000"></span> | Arboleda nevada | 0.2 % | Lobos; nieve polvo (cuidado) |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(229,218,135);border:1px solid #000"></span> | Sabana ventosa | 0.2 % | Terreno muy accidentado |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(176,151,101);border:1px solid #000"></span> | Tierras baldías boscosas | 0.2 % | Meseta con robles |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(181,219,136);border:1px solid #000"></span> | Llanura de girasoles | 0.1 % | Como la llanura; los girasoles marcan el este |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(255,145,200);border:1px solid #000"></span> | Cerezal | 0.1 % | Madera de cerezo, cerdos |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(255,0,255);border:1px solid #000"></span> | Campos de champiñones | 0.1 % | Champiñacas; sin mobs hostiles de noche |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(176,179,206);border:1px solid #000"></span> | Picos helados | 0.1 % | Hielo; montaña muy alta |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(123,143,116);border:1px solid #000"></span> | Picos rocosos | 0.0 % | Calcita, piedra; montaña alta |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(220,220,200);border:1px solid #000"></span> | Picos escarpados | 0.0 % | Montaña muy alta e infranqueable a pie |
+| <span style="display:inline-block;width:1.6em;height:1em;background:rgb(105,109,149);border:1px solid #000"></span> | Jardín pálido | 0.0 % | Creaking de noche |
+
+## 🎨 Estructuras dibujadas en la imagen
 - 🟨: Aldea
 - ⬛ gris: Puesto de saqueadores
 - 🟫: Mansión del bosque

@@ -16,11 +16,11 @@ Recetas en [[Recetas de Crafteo]] · reglas en [[Reglas de Supervivencia]].
 
 **La esmeralda (E) es la moneda.** 1 E equivale a 1 po de 5e. El oro de 5e que aparezca se cambia en las aldeas a 1:1.
 
-| Unidad | Valor |
-|---|---|
-| 1 bloque de esmeralda | 9 E |
-| 1 esmeralda | 1 E = 1 po |
-| **Valor de trueque** | por debajo de 1 E, en pp/pc |
+| Unidad                | Valor                       |
+| --------------------- | --------------------------- |
+| 1 bloque de esmeralda | 9 E                         |
+| 1 esmeralda           | 1 E = 10 po                 |
+| **Valor de trueque**  | por debajo de 1 E, en pp/pc |
 
 **Los aldeanos no dan cambio.** Lo que valga menos de 1 E se paga con mercancía: un saco de carbón, trigo, lana… Por eso el trueque es el día a día, y las esmeraldas sirven para compras grandes.
 
@@ -31,16 +31,16 @@ Recetas en [[Recetas de Crafteo]] · reglas en [[Reglas de Supervivencia]].
 Es el precio de **comprar 1 unidad** a un aldeano. Al **vender** se cobra la **mitad**.
 
 ### Comunes
-| Material | Valor | | Material | Valor |
-|---|---|---|---|---|
-| Tierra, arena, grava, piedra | 1 pc | | Tronco | 4 pc |
-| Tablón / palo | 1 pc | | Carbón | 1 pp |
-| Pedernal | 2 pc | | Pluma, hilo | 2 pc |
-| Lana | 1 pp | | Cuero | 2 pp |
-| Trigo, zanahoria, patata | 1 pc | | Caña de azúcar / papel | 2 pc |
-| Carne cruda | 2 pc | | Carne cocinada / pan | 5 pc |
-| Huevo, manzana | 1 pc | | Calabaza, sandía | 3 pc |
-| Vidrio | 2 pc | | Hueso / harina de hueso | 2 pc |
+| Material                     | Valor |     | Material                | Valor |
+| ---------------------------- | ----- | --- | ----------------------- | ----- |
+| Tierra, arena, grava, piedra | 1 pc  |     | Tronco                  | 4 pc  |
+| Tablón / palo                | 1 pc  |     | Carbón                  | 1 pp  |
+| Pedernal                     | 2 pc  |     | Pluma, hilo             | 2 pc  |
+| Lana                         | 1 pp  |     | Cuero                   | 2 pp  |
+| Trigo, zanahoria, patata     | 1 pc  |     | Caña de azúcar / papel  | 2 pc  |
+| Carne cruda                  | 2 pc  |     | Carne cocinada / pan    | 5 pc  |
+| Huevo, manzana               | 1 pc  |     | Calabaza, sandía        | 3 pc  |
+| Vidrio                       | 2 pc  |     | Hueso / harina de hueso | 2 pc  |
 
 ### Minerales
 | Material | Mineral | Lingote / pieza |
