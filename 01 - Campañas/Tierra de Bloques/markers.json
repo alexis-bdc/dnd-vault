@@ -1,0 +1,86 @@
+[
+  {
+    "type": "aldea",
+    "iconName": "home",
+    "color": "#ffd700",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "saqueadores",
+    "iconName": "flag",
+    "color": "#9a9a9a",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "mansion",
+    "iconName": "dungeon",
+    "color": "#a0522d",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "monumento",
+    "iconName": "water",
+    "color": "#00d0d0",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "templo",
+    "iconName": "monument",
+    "color": "#f0c060",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "bruja",
+    "iconName": "hat-wizard",
+    "color": "#50c040",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "ciudad",
+    "iconName": "skull",
+    "color": "#5080b0",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "fortaleza_end",
+    "iconName": "chess-rook",
+    "color": "#e600e6",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "spawn",
+    "iconName": "star",
+    "color": "#ffffff",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "fortaleza_nether",
+    "iconName": "chess-rook",
+    "color": "#c03030",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "bastion",
+    "iconName": "skull",
+    "color": "#303030",
+    "layer": false,
+    "alpha": 1
+  },
+  {
+    "type": "puerto",
+    "iconName": "anchor",
+    "color": "#3fa9f5",
+    "layer": false,
+    "alpha": 1
+  }
+]

@@ -63,7 +63,21 @@ int main(int argc, char **argv) {
     initBiomeColors(colores);
     W = H = lado / BPP;
     img = malloc((size_t)W * H * 3);
-    biomesToImage(img, colores, ids, n, n, 4 / BPP, 0);
+    biomesToImage(img, colores, ids, n, n, 4 / BPP, 1); // flip=1: fila 0 = norte (con 0 la imagen sale espejada N-S)
+
+    // Máscara de agua cada 64 bloques para trazar caminos: 0 tierra, 1 río, 2 océano
+    char ruta_agua[4096];
+    snprintf(ruta_agua, sizeof ruta_agua, "%s.agua", argv[7]);
+    FILE *agua = fopen(ruta_agua, "w");
+    if (!agua) { perror(ruta_agua); return 1; }
+    for (int j = 0; j < n; j += 16) {
+        for (int i = 0; i < n; i += 16) {
+            int id = ids[(size_t)j * n + i];
+            fputc(isOceanic(id) ? '2' : (id == river || id == frozen_river) ? '1' : '0', agua);
+        }
+        fputc('\n', agua);
+    }
+    fclose(agua);
     free(ids);
 
     // Cuadrícula de viaje (oscurece) y ejes 0,0 (rojo)

@@ -14,3 +14,4 @@ Thumbs.db
 # Herramienta de mapas: librería clonada y binario compilado (se regeneran solos)
 .tools/cubiomes/
 .tools/mapa-mundo/mapa
+.tools/mapa-mundo/__pycache__/

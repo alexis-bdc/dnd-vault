@@ -9,7 +9,7 @@ Crea:
   01 - Campañas/<campaña>/10 - images/Mapa del Mundo.png   (o "Mapa del Nether.png")
   01 - Campañas/<campaña>/Mapa del Mundo.md                (nota con el mapa Leaflet y marcadores)
 """
-import argparse, csv, os, subprocess, sys
+import argparse, csv, json, os, subprocess, sys
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
@@ -17,10 +17,29 @@ VAULT = AQUI.parent.parent
 CUBIOMES = AQUI.parent / "cubiomes"
 BIN = AQUI / "mapa"
 
-# Estructuras que van como marcador clicable en Leaflet (el resto solo se dibuja en la imagen)
-MARCADORES = {"Aldea", "Puesto de saqueadores", "Mansión del bosque", "Monumento oceánico", "Templo del desierto",
-              "Templo de la jungla", "Cabaña de bruja", "Ciudad antigua", "Fortaleza del End",
-              "Punto de aparición", "Fortaleza del Nether", "Bastión"}  # cámaras de desafío, ruinas e iglús salen cientos: solo en la imagen
+# Estructuras con marcador clicable en Leaflet: tipo -> (tipo de marcador, icono Font Awesome, color).
+# Cámaras de desafío, ruinas e iglús salen cientos: solo van dibujados en la imagen.
+TIPOS = {
+    "Aldea": ("aldea", "home", "#ffd700"),
+    "Puesto de saqueadores": ("saqueadores", "flag", "#9a9a9a"),
+    "Mansión del bosque": ("mansion", "dungeon", "#a0522d"),
+    "Monumento oceánico": ("monumento", "water", "#00d0d0"),
+    "Templo del desierto": ("templo", "monument", "#f0c060"),
+    "Templo de la jungla": ("templo", "monument", "#f0c060"),
+    "Cabaña de bruja": ("bruja", "hat-wizard", "#50c040"),
+    "Ciudad antigua": ("ciudad", "skull", "#5080b0"),
+    "Fortaleza del End": ("fortaleza_end", "chess-rook", "#e600e6"),
+    "Punto de aparición": ("spawn", "star", "#ffffff"),
+    "Fortaleza del Nether": ("fortaleza_nether", "chess-rook", "#c03030"),
+    "Bastión": ("bastion", "skull", "#303030"),
+}
+PUERTO = ("puerto", "anchor", "#3fa9f5")  # aldea con ruta marítima
+
+# Caminos: celdas de 64 bloques. Coste por celda según la máscara (0 tierra, 1 río, 2 océano); None = intransitable.
+CELDA = 64
+COSTE_TIERRA = {"0": 1, "1": 4, "2": None}   # los caminos cruzan ríos con puente pero no el mar
+COSTE_MAR = {"0": 6, "1": 1, "2": 1}         # los barcos van por agua y pisan tierra solo para llegar al puerto
+DESVIO_MAX = 2.0  # si el camino por tierra es más del doble que la línea recta, se va en barco
 
 LEYENDA = [("🟨", "Aldea"), ("⬛ gris", "Puesto de saqueadores"), ("🟫", "Mansión del bosque"), ("🟦 cian", "Monumento oceánico"),
            ("🟧 arena", "Templo del desierto"), ("🟩", "Templo de la jungla / cabaña de bruja (verde oscuro)"),
@@ -42,6 +61,68 @@ def compilar():
     src = AQUI / "mapa.c"
     if not BIN.exists() or BIN.stat().st_mtime < src.stat().st_mtime:
         run(["gcc", "-O2", str(src), f"-I{CUBIOMES}", str(CUBIOMES / "libcubiomes.a"), "-lm", "-o", str(BIN)])
+
+
+def camino(agua, coste, a, b):
+    """Dijkstra 8-vecinos sobre la máscara. Devuelve (celdas, longitud en celdas) o None."""
+    import heapq, math
+    n = len(agua)
+    dist, prev, cola = {a: 0.0}, {}, [(0.0, a)]
+    while cola:
+        d, c = heapq.heappop(cola)
+        if c == b:
+            celdas = [c]
+            while c in prev:
+                c = prev[c]; celdas.append(c)
+            celdas.reverse()
+            largo = sum(math.dist(celdas[i], celdas[i + 1]) for i in range(len(celdas) - 1))
+            return celdas, largo
+        if d > dist[c]:
+            continue
+        for dx in (-1, 0, 1):
+            for dz in (-1, 0, 1):
+                v = (c[0] + dx, c[1] + dz)
+                if v == c or not (0 <= v[0] < n and 0 <= v[1] < n):
+                    continue
+                w = coste[agua[v[1]][v[0]]]
+                if w is None and v != b:
+                    continue
+                nd = d + math.hypot(dx, dz) * (w or 1)
+                if nd < dist.get(v, 1e18):
+                    dist[v], prev[v] = nd, c
+                    heapq.heappush(cola, (nd, v))
+    return None
+
+
+def rutas(aldeas, agua, x0):
+    """Árbol de expansión mínima entre aldeas; cada tramo va por tierra o, si no se puede, por mar."""
+    import math
+    celda = lambda a: (min(len(agua) - 1, round((a["x"] - x0) / CELDA)), min(len(agua) - 1, round((a["z"] - x0) / CELDA)))
+    pares = sorted((math.dist((a["x"], a["z"]), (b["x"], b["z"])), i, j)
+                   for i, a in enumerate(aldeas) for j, b in enumerate(aldeas) if i < j)
+    grupo = list(range(len(aldeas)))
+    def raiz(i):
+        while grupo[i] != i:
+            grupo[i] = grupo[grupo[i]]; i = grupo[i]
+        return i
+    out = []
+    for recta, i, j in pares:
+        if raiz(i) == raiz(j):
+            continue
+        grupo[raiz(i)] = raiz(j)
+        a, b = celda(aldeas[i]), celda(aldeas[j])
+        tierra = camino(agua, COSTE_TIERRA, a, b)
+        if tierra and tierra[1] * CELDA <= max(recta, CELDA) * DESVIO_MAX:
+            tipo, (celdas, largo) = "camino", tierra
+        else:
+            tipo, (celdas, largo) = "mar", camino(agua, COSTE_MAR, a, b)
+        # Solo los puntos donde cambia la dirección
+        puntos = [celdas[0]] + [c for k, c in enumerate(celdas[1:-1], 1)
+                                if (c[0] - celdas[k - 1][0], c[1] - celdas[k - 1][1]) != (celdas[k + 1][0] - c[0], celdas[k + 1][1] - c[1])] + [celdas[-1]]
+        coords = [[x0 + c[0] * CELDA, x0 + c[1] * CELDA] for c in puntos]
+        coords[0] = [aldeas[i]["x"], aldeas[i]["z"]]; coords[-1] = [aldeas[j]["x"], aldeas[j]["z"]]
+        out.append({"i": i, "j": j, "tipo": tipo, "bloques": round(largo * CELDA), "coords": coords})
+    return out
 
 
 def main():
@@ -72,17 +153,56 @@ def main():
     os.remove(f"{salida}.ppm")
 
     with open(f"{salida}.csv", newline="") as f:
-        filas = list(csv.DictReader(f))
+        filas = [dict(r, x=int(r["x"]), z=int(r["z"])) for r in csv.DictReader(f)]
     os.remove(f"{salida}.csv")
+    with open(f"{salida}.agua") as f:
+        agua = f.read().split()
+    os.remove(f"{salida}.agua")
+
+    # Aldeas numeradas por cercanía al punto de aparición, y red de caminos / rutas marítimas entre ellas
+    spawn = next((r for r in filas if r["tipo"] == "Punto de aparición"), {"x": 0, "z": 0})
+    aldeas = sorted((r for r in filas if r["tipo"] == "Aldea"), key=lambda r: (r["x"] - spawn["x"]) ** 2 + (r["z"] - spawn["z"]) ** 2)
+    for k, r in enumerate(aldeas, 1):
+        r["nombre"] = f"Aldea {k}"
+    red = rutas(aldeas, agua, -(a.lado - a.lado % 4) // 2) if len(aldeas) > 1 else []
+    puertos = {t[k] for t in red if t["tipo"] == "mar" for k in ("i", "j")}
+    for k in puertos:
+        aldeas[k]["puerto"] = True
+
+    # Tipos de marcador para las notas de esta carpeta (el plugin lee markers.json junto a la nota)
+    iconos = {v[0]: v for v in [*TIPOS.values(), PUERTO]}
+    (camp / "markers.json").write_text(json.dumps(
+        [{"type": t, "iconName": i, "color": c, "layer": False, "alpha": 1} for t, i, c in iconos.values()],
+        ensure_ascii=False, indent=2), encoding="utf-8")
 
     # Leaflet: latitud = -Z (norte arriba), longitud = X. Así 1 unidad del mapa = 1 bloque.
     m = a.lado // 2
+    def marcador(r):
+        tipo = PUERTO[0] if r.get("puerto") else TIPOS[r["tipo"]][0]
+        nombre = r.get("nombre", r["tipo"]) + (" ⚓ puerto" if r.get("puerto") else "")
+        return f'    - "{tipo},{-r["z"]},{r["x"]},,{nombre} (X {r["x"]} · Z {r["z"]})"'
     # Una sola clave `marker:` con lista: si se repite la clave, el YAML falla y Leaflet pierde `bounds`
-    marcadores = [f'    - "default,{-int(r["z"])},{int(r["x"])},,{r["tipo"]} (X {r["x"]} · Z {r["z"]})"'
-                  for r in filas if r["tipo"] in MARCADORES]
+    marcadores = [marcador(r) for r in filas if r["tipo"] in TIPOS]
     resumen = {}
     for r in filas:
         resumen[r["tipo"]] = resumen.get(r["tipo"], 0) + 1
+
+    # GeoJSON con las rutas: coordenadas [longitud, latitud] = [X, -Z]
+    geo = camp / f"Rutas - {nombre}.geojson"
+    filas_rutas = []
+    if red:
+        feats = []
+        for t in sorted(red, key=lambda t: (t["i"], t["j"])):
+            A, B = aldeas[t["i"]]["nombre"], aldeas[t["j"]]["nombre"]
+            horas = t["bloques"] / (500 if t["tipo"] == "camino" else 1000)
+            medio = "a pie" if t["tipo"] == "camino" else "en barco"
+            feats.append({"type": "Feature",
+                          "properties": {"name": f"{'🛤️ Camino' if t['tipo'] == 'camino' else '⛵ Ruta marítima'} {A} ↔ {B}: {t['bloques']} bloques, {horas:.1f} h {medio}",
+                                         "stroke": "#a0522d" if t["tipo"] == "camino" else "#1e90ff", "stroke-width": 3, "stroke-opacity": 0.9},
+                          "geometry": {"type": "LineString", "coordinates": [[x, -z] for x, z in t["coords"]]}})
+            filas_rutas.append(f"| {A} ↔ {B} | {'🛤️ Camino' if t['tipo'] == 'camino' else '⛵ Mar'} | {t['bloques']} | {horas:.1f} h {medio}"
+                               + (f" ({t['bloques'] / 1000:.1f} h a caballo)" if t["tipo"] == "camino" else "") + " |")
+        geo.write_text(json.dumps({"type": "FeatureCollection", "features": feats}, ensure_ascii=False), encoding="utf-8")
 
     escala_nota = ("1 bloque del Nether = 8 del mundo: 1 h de viaje aquí = 8 h en la superficie."
                    if a.nether else f"Cada cuadro de la cuadrícula = {a.cuadricula} bloques = 1 hora a pie (½ a caballo).")
@@ -103,7 +223,7 @@ Semilla **{a.semilla}** · Java {a.version} · {a.lado}×{a.lado} bloques centra
 
 > [!tip] Cómo usarlo (plugin **Leaflet**)
 > - **Medir:** Shift + clic en un punto y Shift + clic en otro. La distancia sale en bloques (abajo a la izquierda).
-> - **Horas de viaje:** bloques ÷ 500 a pie, ÷ 1000 a caballo, y ÷ 8 adicional por el Nether.
+> - **Horas de viaje:** bloques ÷ 500 a pie, ÷ 1000 a caballo o en barco, y ÷ 8 adicional por el Nether.\n> - **Pasa el ratón** por un icono o una ruta para ver qué es.
 > - **Coordenadas:** el mapa usa las del juego. En `location: [lat, long]` de un lugar pon **[−Z, X]** (la Z cambia de signo para que el norte quede arriba).
 > - Clic derecho → crear marcador propio.
 
@@ -122,7 +242,7 @@ unit: bloques
 scale: 1
 markerFolder: 01 - Campañas/{a.campaña}/05 - Lugares
 draw: true
-marker:
+{f'geojson: [[{geo.name}]]' + chr(10) if red else ''}marker:
 {chr(10).join(marcadores)}
 ```
 
@@ -130,6 +250,9 @@ marker:
 | Estructura | Cantidad |
 |---|---|
 {chr(10).join(f"| {k} | {v} |" for k, v in sorted(resumen.items()))}
+
+{"## 🛤️ Caminos y rutas marítimas" + chr(10) + "Red mínima que une todas las aldeas. Los caminos rodean el mar y cruzan los ríos con puente; si por tierra hay que dar un rodeo de más del doble, se va en barco entre puertos (⚓)." + chr(10) + chr(10) + "| Ruta | Tipo | Bloques | Tiempo |" + chr(10) + "|---|---|---|---|" + chr(10) + chr(10).join(filas_rutas) + chr(10) + chr(10) if filas_rutas else ""}## 🧭 Iconos de Leaflet
+🏠 Aldea · ⚓ Aldea con puerto · 🚩 Puesto de saqueadores · 🏚️ Mansión · 🌊 Monumento oceánico · 🗿 Templo · 🧙 Cabaña de bruja · 💀 Ciudad antigua · ♜ Fortaleza del End · ⭐ Punto de aparición
 
 ## 🎨 Leyenda de la imagen
 {chr(10).join(f"- {c}: {t}" for c, t in LEYENDA)}
