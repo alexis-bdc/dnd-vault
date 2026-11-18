@@ -77,7 +77,8 @@ def main():
 
     # Leaflet: latitud = -Z (norte arriba), longitud = X. Así 1 unidad del mapa = 1 bloque.
     m = a.lado // 2
-    marcadores = [f'marker: default,{-int(r["z"])},{int(r["x"])},,{r["tipo"]} (X {r["x"]} · Z {r["z"]})'
+    # Una sola clave `marker:` con lista: si se repite la clave, el YAML falla y Leaflet pierde `bounds`
+    marcadores = [f'    - "default,{-int(r["z"])},{int(r["x"])},,{r["tipo"]} (X {r["x"]} · Z {r["z"]})"'
                   for r in filas if r["tipo"] in MARCADORES]
     resumen = {}
     for r in filas:
@@ -121,6 +122,7 @@ unit: bloques
 scale: 1
 markerFolder: 01 - Campañas/{a.campaña}/05 - Lugares
 draw: true
+marker:
 {chr(10).join(marcadores)}
 ```
 
